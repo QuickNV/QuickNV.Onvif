@@ -1,19 +1,10 @@
 ﻿using Newtonsoft.Json;
 
-/*
- * --HTTPS--
- var deviceClient = new Quick.Onvif.Device.DeviceClient(
-    "https://127.0.0.1/onvif/device_service",
-    "admin",
-    "Bs123456",
-    Quick.Onvif.Core.HttpsClientFactory.Default);
- */
+// HTTPS Url Example: https://127.0.0.1/onvif/device_service
 var deviceClient = new Quick.Onvif.Device.DeviceClient(
     "http://127.0.0.1/onvif/device_service",
     "admin",
-    "Bs123456",
-    Quick.Onvif.Core.HttpClientFactory.Default);
-
+    "Bs123456");
 {
     Console.WriteLine("Geting Device Information...");
     var rep = await deviceClient.GetDeviceInformationAsync(new Quick.Onvif.Device.GetDeviceInformationRequest());

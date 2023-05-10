@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,10 +10,12 @@ namespace Quick.Onvif.Device
 {
     public partial class DeviceClient
     {
-        public DeviceClient(string url, string username, string password, ClientFactoryBase factory)
-            : base(factory.Binding, new System.ServiceModel.EndpointAddress(url))
+        public DeviceClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+            : base(
+                  ClientFactoryBase.GetClientFactory(url, clientCredentialType).Binding,
+                  new EndpointAddress(url))
         {
-            factory.InitClient(this, username, password);
+            ClientFactoryBase.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
         }
     }
 }

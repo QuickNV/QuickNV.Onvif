@@ -5,7 +5,6 @@ namespace Quick.Onvif.Core
     public class HttpClientFactory : ClientFactoryBase
     {
         private HttpClientCredentialType clientCredentialType;
-        public static HttpClientFactory Default { get; } = new HttpClientFactory();
 
         public HttpClientFactory()
             : this(HttpClientCredentialType.Digest)
