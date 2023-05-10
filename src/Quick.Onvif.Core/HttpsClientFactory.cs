@@ -1,30 +1,53 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Selectors;
+using System.Linq;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel;
+using System.ServiceModel.Security;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Quick.Onvif.Core
 {
-    public class HttpClientFactory : ClientFactoryBase
+    public class HttpsClientFactory : ClientFactoryBase
     {
         private HttpClientCredentialType clientCredentialType;
-        public static HttpClientFactory Default { get; } = new HttpClientFactory();
+        public static HttpsClientFactory Default { get; } = new HttpsClientFactory();
 
-        public HttpClientFactory()
+        public HttpsClientFactory()
             : this(HttpClientCredentialType.Digest)
         {
         }
 
-        public HttpClientFactory(HttpClientCredentialType clientCredentialType)
+        public HttpsClientFactory(HttpClientCredentialType clientCredentialType)
         {
             var binding = new NetHttpBinding();
             binding.MessageEncoding = NetHttpMessageEncoding.Text;
-            binding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
+            binding.Security.Mode = BasicHttpSecurityMode.Transport;
             binding.Security.Transport.ClientCredentialType = clientCredentialType;
-
+            
             InitConfig(binding);
             this.clientCredentialType = clientCredentialType;
         }
 
+        private class MyX509CertificateValidator : X509CertificateValidator
+        {
+            public static MyX509CertificateValidator Default { get; } = new MyX509CertificateValidator();
+            public override void Validate(X509Certificate2 certificate)
+            {
+            }
+        }
+
         public override void InitClient<TChannel>(ClientBase<TChannel> client, string username, string password)
         {
+            client.ChannelFactory.Credentials.ServiceCertificate.SslCertificateAuthentication = new X509ServiceCertificateAuthentication()
+            {
+                CertificateValidationMode = X509CertificateValidationMode.Custom,
+                CustomCertificateValidator = MyX509CertificateValidator.Default
+            };
+
             switch (clientCredentialType)
             {
                 case HttpClientCredentialType.Digest:

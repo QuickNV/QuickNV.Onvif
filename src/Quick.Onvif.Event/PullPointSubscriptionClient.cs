@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quick.Onvif.Device
+namespace Quick.Onvif.Event
 {
-    public partial class DeviceClient
+    public partial class PullPointSubscriptionClient
     {
-        public DeviceClient(string url, string username, string password, ClientFactoryBase factory)
+        public PullPointSubscriptionClient(string url, string username, string password, ClientFactoryBase factory)
             : base(factory.Binding, new System.ServiceModel.EndpointAddress(url))
         {
             factory.InitClient(this, username, password);

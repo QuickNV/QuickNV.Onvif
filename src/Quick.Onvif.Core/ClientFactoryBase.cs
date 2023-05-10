@@ -11,15 +11,13 @@ namespace Quick.Onvif.Core
     public abstract class ClientFactoryBase
     {
         public Binding Binding { get; private set; }
-        public EndpointAddress RemoteAddress { get; private set; }
 
-        protected void InitConfig(Binding binding, EndpointAddress remoteAddress)
+        protected void InitConfig(Binding binding)
         {
             this.Binding = binding;
-            this.RemoteAddress = remoteAddress;
         }
 
-        public abstract void InitClient<TChannel>(ClientBase<TChannel> client)
+        public abstract void InitClient<TChannel>(ClientBase<TChannel> client, string username, string password)
             where TChannel : class;
     }
 }
