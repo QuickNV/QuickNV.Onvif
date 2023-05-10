@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Quick.Onvif\Quick.Onvif.csproj" />
+    <ProjectReference Include="..\Quick.Onvif.Device\Quick.Onvif.Device.csproj" />
   </ItemGroup>
 
 </Project>
