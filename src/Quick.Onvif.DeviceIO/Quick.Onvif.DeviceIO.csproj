@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>scbeta</Authors>
+		<Product>Quick.Onvif</Product>
+		<PackageProjectUrl>https://github.com/aaasoft/Quick.Onvif</PackageProjectUrl>
+		<PackageIcon>logo.png</PackageIcon>
+		<RepositoryUrl>https://github.com/aaasoft/Quick.Onvif</RepositoryUrl>
+		<PackageTags>ONVIF;Onvif;Camera;</PackageTags>
+		<Description>Device IO service for Quick.Onvif.</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Quick.Onvif.Core\Quick.Onvif.Core.csproj" />
+	</ItemGroup>
+
+</Project>

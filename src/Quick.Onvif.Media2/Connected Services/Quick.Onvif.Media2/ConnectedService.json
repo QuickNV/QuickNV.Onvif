@@ -1,0 +1,16 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "https://www.onvif.org/ver20/media/wsdl/media.wsdl"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, Quick.Onvif.Media2"
+    ],
+    "targetFramework": "net6.0",
+    "typeReuseMode": "None"
+  }
+}

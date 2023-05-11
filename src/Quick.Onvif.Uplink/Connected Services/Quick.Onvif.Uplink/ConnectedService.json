@@ -1,0 +1,16 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "https://www.onvif.org/ver10/uplink/wsdl/uplink.wsdl"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, Quick.Onvif.Uplink"
+    ],
+    "targetFramework": "net6.0",
+    "typeReuseMode": "None"
+  }
+}
