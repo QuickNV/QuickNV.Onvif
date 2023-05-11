@@ -10,12 +10,17 @@ namespace Quick.Onvif.DeviceIO
 {
     public partial class DeviceClient
     {
-        public DeviceClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
-    : base(
-          ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
-          new EndpointAddress(url))
+        public DeviceClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(DeviceIO)))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+        }
+
+        public DeviceClient(ClientFactory factory, string url)
+            : base(
+                  factory.Binding,
+                  new EndpointAddress(url))
+        {
+            factory.InitClient(this);
         }
     }
 }

@@ -5,12 +5,17 @@ namespace Quick.Onvif.Uplink
 {
     public partial class UplinkPortClient
     {
-        public UplinkPortClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public UplinkPortClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(Uplink)))
+        {
+        }
+
+        public UplinkPortClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }

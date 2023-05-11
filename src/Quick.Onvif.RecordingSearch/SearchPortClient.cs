@@ -5,12 +5,17 @@ namespace Quick.Onvif.RecordingSearch
 {
     public partial class SearchPortClient
     {
-        public SearchPortClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public SearchPortClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(RecordingSearch)))
+        {
+        }
+
+        public SearchPortClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }

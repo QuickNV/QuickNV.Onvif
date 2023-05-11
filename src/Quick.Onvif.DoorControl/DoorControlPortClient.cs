@@ -5,12 +5,17 @@ namespace Quick.Onvif.DoorControl
 {
     public partial class DoorControlPortClient
     {
-        public DoorControlPortClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public DoorControlPortClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(DoorControl)))
+        {
+        }
+
+        public DoorControlPortClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }

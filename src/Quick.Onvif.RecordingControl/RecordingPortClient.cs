@@ -5,12 +5,17 @@ namespace Quick.Onvif.RecordingControl
 {
     public partial class RecordingPortClient
     {
-        public RecordingPortClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public RecordingPortClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(RecordingControl)))
+        {
+        }
+
+        public RecordingPortClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }

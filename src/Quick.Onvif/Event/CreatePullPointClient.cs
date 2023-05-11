@@ -6,16 +6,16 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quick.Onvif.Security
+namespace Quick.Onvif.Event
 {
-    public partial class TLSServerClient
+    public partial class CreatePullPointClient
     {
-        public TLSServerClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(Security)))
+        public CreatePullPointClient(OnvifClient client)
+            : this(client.ClientFactory, client.Capabilities.Events.XAddr)
         {
         }
 
-        public TLSServerClient(ClientFactory factory, string url)
+        public CreatePullPointClient(ClientFactory factory, string url)
             : base(
                   factory.Binding,
                   new EndpointAddress(url))

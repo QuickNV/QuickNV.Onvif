@@ -5,12 +5,17 @@ namespace Quick.Onvif.AuthenticationBehavior
 {
     public partial class AuthenticationBehaviorPortClient
     {
-        public AuthenticationBehaviorPortClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public AuthenticationBehaviorPortClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(AuthenticationBehavior)))
+        {
+        }
+
+        public AuthenticationBehaviorPortClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }

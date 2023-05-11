@@ -5,12 +5,17 @@ namespace Quick.Onvif.Provisioning
 {
     public partial class ProvisioningServiceClient
     {
-        public ProvisioningServiceClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public ProvisioningServiceClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(Provisioning)))
+        {
+        }
+
+        public ProvisioningServiceClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }

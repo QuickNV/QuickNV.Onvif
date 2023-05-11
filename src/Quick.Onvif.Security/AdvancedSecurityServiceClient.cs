@@ -10,12 +10,17 @@ namespace Quick.Onvif.Security
 {
     public partial class AdvancedSecurityServiceClient
     {
-        public AdvancedSecurityServiceClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public AdvancedSecurityServiceClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(Security)))
+        {
+        }
+
+        public AdvancedSecurityServiceClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }

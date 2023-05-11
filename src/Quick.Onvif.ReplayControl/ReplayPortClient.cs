@@ -5,12 +5,17 @@ namespace Quick.Onvif.ReplayControl
 {
     public partial class ReplayPortClient
     {
-        public ReplayPortClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public ReplayPortClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(ReplayControl)))
+        {
+        }
+
+        public ReplayPortClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }

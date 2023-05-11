@@ -5,12 +5,17 @@ namespace Quick.Onvif.Receiver
 {
     public partial class ReceiverPortClient
     {
-        public ReceiverPortClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public ReceiverPortClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(Receiver)))
+        {
+        }
+
+        public ReceiverPortClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }

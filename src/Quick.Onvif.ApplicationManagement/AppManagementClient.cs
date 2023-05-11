@@ -5,12 +5,17 @@ namespace Quick.Onvif.ApplicationManagement
 {
     public partial class AppManagementClient
     {
-        public AppManagementClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
-                    : base(
-                          ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
-                          new EndpointAddress(url))
+        public AppManagementClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(ApplicationManagement)))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+        }
+
+        public AppManagementClient(ClientFactory factory, string url)
+            : base(
+                  factory.Binding,
+                  new EndpointAddress(url))
+        {
+            factory.InitClient(this);
         }
     }
 }

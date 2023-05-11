@@ -5,12 +5,17 @@ namespace Quick.Onvif.Display
 {
     public partial class DisplayPortClient
     {
-        public DisplayPortClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public DisplayPortClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(Display)))
+        {
+        }
+
+        public DisplayPortClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }

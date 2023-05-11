@@ -11,37 +11,30 @@ namespace Quick.Onvif.Factorys
     public abstract class ClientFactory
     {
         public Binding Binding { get; private set; }
+        protected string UserName { get; private set; }
+        protected string Password { get; private set; }
 
-        protected void InitConfig(Binding binding)
+        protected void InitConfig(Binding binding, string userName, string password)
         {
-            this.Binding = binding;
+            Binding = binding;
+            UserName = userName;
+            Password = password;
         }
 
-        public abstract void InitClient<TChannel>(ClientBase<TChannel> client, string username, string password)
+        public abstract void InitClient<TChannel>(ClientBase<TChannel> client)
             where TChannel : class;
 
-
-        private static Dictionary<string, ClientFactory> clientFactoryDict = new Dictionary<string, ClientFactory>();
-        public static ClientFactory GetClientFactory(string url, HttpClientCredentialType clientCredentialType)
+        public static ClientFactory GetClientFactory(string scheme, string username, string password, HttpClientCredentialType clientCredentialType)
         {
-            var uri = new Uri(url);
-            var key = $"{uri.Scheme}_{clientCredentialType}";
-            if (clientFactoryDict.TryGetValue(key, out ClientFactory clientFactory))
-                return clientFactory;
-
-            switch (uri.Scheme)
+            switch (scheme)
             {
                 case "http":
-                    clientFactory = new HttpClientFactory(clientCredentialType);
-                    break;
+                    return new HttpClientFactory(username, password, clientCredentialType);
                 case "https":
-                    clientFactory = new HttpsClientFactory(clientCredentialType);
-                    break;
+                    return new HttpsClientFactory(username, password, clientCredentialType);
                 default:
                     throw new NotSupportedException();
             }
-            clientFactoryDict[key] = clientFactory;
-            return clientFactory;
         }
     }
 }

@@ -5,12 +5,17 @@ namespace Quick.Onvif.PTZ
 {
     public partial class PTZClient
     {
-        public PTZClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public PTZClient(OnvifClient client)
+            : this(client.ClientFactory, client.Capabilities.PTZ.XAddr)
+        {
+        }
+
+        public PTZClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }

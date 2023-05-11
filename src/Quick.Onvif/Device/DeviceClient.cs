@@ -10,12 +10,17 @@ namespace Quick.Onvif.Device
 {
     public partial class DeviceClient
     {
-        public DeviceClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public DeviceClient(OnvifClient client)
+            : this(client.ClientFactory, client.Capabilities.Media.XAddr)
+        {
+        }
+
+        public DeviceClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }

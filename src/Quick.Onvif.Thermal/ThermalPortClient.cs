@@ -5,12 +5,17 @@ namespace Quick.Onvif.Thermal
 {
     public partial class ThermalPortClient
     {
-        public ThermalPortClient(string url, string username, string password, HttpClientCredentialType clientCredentialType = HttpClientCredentialType.Digest)
+        public ThermalPortClient(OnvifClient client)
+            : this(client.ClientFactory, client.GetXAddr(nameof(Thermal)))
+        {
+        }
+
+        public ThermalPortClient(ClientFactory factory, string url)
             : base(
-                  ClientFactory.GetClientFactory(url, clientCredentialType).Binding,
+                  factory.Binding,
                   new EndpointAddress(url))
         {
-            ClientFactory.GetClientFactory(url, clientCredentialType).InitClient(this, username, password);
+            factory.InitClient(this);
         }
     }
 }
