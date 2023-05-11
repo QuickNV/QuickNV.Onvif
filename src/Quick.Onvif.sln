@@ -5,12 +5,6 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestClient", "TestClient\TestClient.csproj", "{88114508-F3A6-4E3E-B1FC-DAB4A7150D58}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Core", "Quick.Onvif.Core\Quick.Onvif.Core.csproj", "{85334946-E596-4330-88C4-0FBE1DCAB9D8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Device", "Quick.Onvif.Device\Quick.Onvif.Device.csproj", "{DF663AC5-0365-4F1E-9BCF-639E73E47D4A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Event", "Quick.Onvif.Event\Quick.Onvif.Event.csproj", "{556CD0FE-E55B-4127-A5E4-966DD07B4106}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.AccessControl", "Quick.Onvif.AccessControl\Quick.Onvif.AccessControl.csproj", "{59844743-4E14-46CA-8464-63F2BE7D0519}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.ActionEngine", "Quick.Onvif.ActionEngine\Quick.Onvif.ActionEngine.csproj", "{586D6B5E-8306-429E-B34B-00A8F9D48046}"
@@ -55,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Thermal", "Quic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Uplink", "Quick.Onvif.Uplink\Quick.Onvif.Uplink.csproj", "{6387CBEE-4FA9-461D-A97B-387CAAB3FE5D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif", "Quick.Onvif\Quick.Onvif.csproj", "{5E193505-FA33-43E8-8C55-26A12557206D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,18 +61,6 @@ Global
 		{88114508-F3A6-4E3E-B1FC-DAB4A7150D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88114508-F3A6-4E3E-B1FC-DAB4A7150D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88114508-F3A6-4E3E-B1FC-DAB4A7150D58}.Release|Any CPU.Build.0 = Release|Any CPU
-		{85334946-E596-4330-88C4-0FBE1DCAB9D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85334946-E596-4330-88C4-0FBE1DCAB9D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85334946-E596-4330-88C4-0FBE1DCAB9D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85334946-E596-4330-88C4-0FBE1DCAB9D8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF663AC5-0365-4F1E-9BCF-639E73E47D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF663AC5-0365-4F1E-9BCF-639E73E47D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF663AC5-0365-4F1E-9BCF-639E73E47D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF663AC5-0365-4F1E-9BCF-639E73E47D4A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{556CD0FE-E55B-4127-A5E4-966DD07B4106}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{556CD0FE-E55B-4127-A5E4-966DD07B4106}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{556CD0FE-E55B-4127-A5E4-966DD07B4106}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{556CD0FE-E55B-4127-A5E4-966DD07B4106}.Release|Any CPU.Build.0 = Release|Any CPU
 		{59844743-4E14-46CA-8464-63F2BE7D0519}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{59844743-4E14-46CA-8464-63F2BE7D0519}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59844743-4E14-46CA-8464-63F2BE7D0519}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -165,6 +149,10 @@ Global
 		{6387CBEE-4FA9-461D-A97B-387CAAB3FE5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6387CBEE-4FA9-461D-A97B-387CAAB3FE5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6387CBEE-4FA9-461D-A97B-387CAAB3FE5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E193505-FA33-43E8-8C55-26A12557206D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E193505-FA33-43E8-8C55-26A12557206D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E193505-FA33-43E8-8C55-26A12557206D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E193505-FA33-43E8-8C55-26A12557206D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,9 +6,9 @@ using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quick.Onvif.Core
+namespace Quick.Onvif.Factorys
 {
-    public abstract class ClientFactoryBase
+    public abstract class ClientFactory
     {
         public Binding Binding { get; private set; }
 
@@ -21,12 +21,12 @@ namespace Quick.Onvif.Core
             where TChannel : class;
 
 
-        private static Dictionary<string, ClientFactoryBase> clientFactoryDict = new Dictionary<string, ClientFactoryBase>();
-        public static ClientFactoryBase GetClientFactory(string url, HttpClientCredentialType clientCredentialType)
+        private static Dictionary<string, ClientFactory> clientFactoryDict = new Dictionary<string, ClientFactory>();
+        public static ClientFactory GetClientFactory(string url, HttpClientCredentialType clientCredentialType)
         {
             var uri = new Uri(url);
             var key = $"{uri.Scheme}_{clientCredentialType}";
-            if (clientFactoryDict.TryGetValue(key, out ClientFactoryBase clientFactory))
+            if (clientFactoryDict.TryGetValue(key, out ClientFactory clientFactory))
                 return clientFactory;
 
             switch (uri.Scheme)

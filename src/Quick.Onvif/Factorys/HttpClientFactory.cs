@@ -1,36 +1,29 @@
 ﻿using System.ServiceModel;
 
-namespace Quick.Onvif
+namespace Quick.Onvif.Factorys
 {
-    public class HttpClientFactory : ClientFactoryBase
+    public class HttpClientFactory : ClientFactory
     {
-        private string username;
-        private string password;
         private HttpClientCredentialType clientCredentialType;
 
-        public HttpClientFactory(string url, string username, string password)
-            : this(url, username, password, HttpClientCredentialType.Digest)
+        public HttpClientFactory()
+            : this(HttpClientCredentialType.Digest)
         {
         }
 
-        public HttpClientFactory(string url, string username, string password, HttpClientCredentialType clientCredentialType)
+        public HttpClientFactory(HttpClientCredentialType clientCredentialType)
         {
             var binding = new NetHttpBinding();
             binding.MessageEncoding = NetHttpMessageEncoding.Text;
             binding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
             binding.Security.Transport.ClientCredentialType = clientCredentialType;
 
-            var endpoint = new EndpointAddress(url);
-            Init(binding, endpoint);
-
-            this.username = username;
-            this.password = password;
+            InitConfig(binding);
             this.clientCredentialType = clientCredentialType;
         }
 
-        public override TClient Create<TChannel, TClient>()
+        public override void InitClient<TChannel>(ClientBase<TChannel> client, string username, string password)
         {
-            var client = base.Create<TChannel, TClient>();
             switch (clientCredentialType)
             {
                 case HttpClientCredentialType.Digest:
@@ -44,7 +37,6 @@ namespace Quick.Onvif
                 default:
                     throw new NotSupportedException("Parameter 'clientCredentialType' only support Digest and Basic.");
             }
-            return client;
         }
     }
 }

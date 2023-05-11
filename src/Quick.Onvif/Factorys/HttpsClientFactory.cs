@@ -9,9 +9,9 @@ using System.ServiceModel.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quick.Onvif.Core
+namespace Quick.Onvif.Factorys
 {
-    public class HttpsClientFactory : ClientFactoryBase
+    public class HttpsClientFactory : ClientFactory
     {
         private HttpClientCredentialType clientCredentialType;
 
