@@ -14,5 +14,6 @@ namespace Quick.Onvif
         public string Password { get; set; }
         public HttpClientCredentialType ClientCredentialType { get; set; } = HttpClientCredentialType.Digest;
         public Func<OnvifClientOptions, string, string> GetXAddrFunc { get; set; }
+        public int RtspPort { get; set; }
     }
 }

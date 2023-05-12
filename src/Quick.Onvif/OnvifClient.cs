@@ -12,8 +12,8 @@ namespace Quick.Onvif
 {
     public class OnvifClient
     {
-        private OnvifClientOptions options;
-        private Uri deviceServiceAddressUri;
+        public OnvifClientOptions Options { get; private set; }
+        public Uri DeviceServiceAddressUri { get; private set; }
 
         public Device.GetDeviceInformationResponse DeviceInformation { get; private set; }
         public Device.Capabilities Capabilities { get; private set; }
@@ -21,26 +21,26 @@ namespace Quick.Onvif
         public ClientFactory ClientFactory { get; private set; }
         public OnvifClient(OnvifClientOptions options)
         {
-            this.options = options;
+            this.Options = options;
         }
         private string handleXAddr(string addr)
         {
             var uri = new Uri(addr);
-            var newUri = new Uri(deviceServiceAddressUri, uri.PathAndQuery);
+            var newUri = new Uri(DeviceServiceAddressUri, uri.PathAndQuery);
             return newUri.ToString();
         }
 
         public async Task ConnectAsync()
         {
-            deviceServiceAddressUri = new Uri(options.DeviceServiceAddress);
+            DeviceServiceAddressUri = new Uri(Options.DeviceServiceAddress);
 
             ClientFactory = ClientFactory.GetClientFactory(
-                deviceServiceAddressUri.Scheme,
-                options.UserName,
-                options.Password,
-                options.ClientCredentialType);
+                DeviceServiceAddressUri.Scheme,
+                Options.UserName,
+                Options.Password,
+                Options.ClientCredentialType);
 
-            DeviceClient = new Device.DeviceClient(ClientFactory, options.DeviceServiceAddress);
+            DeviceClient = new Device.DeviceClient(ClientFactory, Options.DeviceServiceAddress);
             //Get Device Information
             DeviceInformation = await DeviceClient.GetDeviceInformationAsync(new Device.GetDeviceInformationRequest());
             //Get Capabilities
@@ -83,9 +83,9 @@ namespace Quick.Onvif
 
         public string GetXAddr(string name)
         {
-            if (options == null)
-                throw new ArgumentNullException(nameof(options.GetXAddrFunc));
-            return options.GetXAddrFunc(options, name);
+            if (Options == null)
+                throw new ArgumentNullException(nameof(Options.GetXAddrFunc));
+            return Options.GetXAddrFunc(Options, name);
         }
     }
 }

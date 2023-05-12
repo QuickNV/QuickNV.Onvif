@@ -13,43 +13,45 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Analytics", "Qu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.ApplicationManagement", "Quick.Onvif.ApplicationManagement\Quick.Onvif.ApplicationManagement.csproj", "{5951EBCE-E6A9-40AC-9D5D-E3F8BA31790A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.AuthenticationBehavior", "Quick.Onvif.AuthenticationBehavior\Quick.Onvif.AuthenticationBehavior.csproj", "{2E2CBA97-8973-4CCE-971A-5C56804FE488}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.AuthenticationBehavior", "Quick.Onvif.AuthenticationBehavior\Quick.Onvif.AuthenticationBehavior.csproj", "{2E2CBA97-8973-4CCE-971A-5C56804FE488}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Credential", "Quick.Onvif.Credential\Quick.Onvif.Credential.csproj", "{89D8ADC1-F1C6-4051-B8E8-595B7238C480}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Credential", "Quick.Onvif.Credential\Quick.Onvif.Credential.csproj", "{89D8ADC1-F1C6-4051-B8E8-595B7238C480}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.DeviceIO", "Quick.Onvif.DeviceIO\Quick.Onvif.DeviceIO.csproj", "{4F8FBCFF-A3EB-4259-8A84-6F40C781AB9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.DeviceIO", "Quick.Onvif.DeviceIO\Quick.Onvif.DeviceIO.csproj", "{4F8FBCFF-A3EB-4259-8A84-6F40C781AB9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Display", "Quick.Onvif.Display\Quick.Onvif.Display.csproj", "{8FB586D6-4CD6-44E1-9358-3D2A50A4ACC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Display", "Quick.Onvif.Display\Quick.Onvif.Display.csproj", "{8FB586D6-4CD6-44E1-9358-3D2A50A4ACC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.DoorControl", "Quick.Onvif.DoorControl\Quick.Onvif.DoorControl.csproj", "{52FBA4D1-1B07-40ED-BF44-96D8AE07D317}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.DoorControl", "Quick.Onvif.DoorControl\Quick.Onvif.DoorControl.csproj", "{52FBA4D1-1B07-40ED-BF44-96D8AE07D317}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Imaging", "Quick.Onvif.Imaging\Quick.Onvif.Imaging.csproj", "{CA8B8BC8-D3D7-4B1E-BC1E-7BE4620B2EF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Imaging", "Quick.Onvif.Imaging\Quick.Onvif.Imaging.csproj", "{CA8B8BC8-D3D7-4B1E-BC1E-7BE4620B2EF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Media", "Quick.Onvif.Media\Quick.Onvif.Media.csproj", "{E609514E-7C05-4A25-899B-C7583E577695}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Media", "Quick.Onvif.Media\Quick.Onvif.Media.csproj", "{E609514E-7C05-4A25-899B-C7583E577695}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Media2", "Quick.Onvif.Media2\Quick.Onvif.Media2.csproj", "{4361F0CC-0E24-471F-9382-0DE7DCADF2E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Media2", "Quick.Onvif.Media2\Quick.Onvif.Media2.csproj", "{4361F0CC-0E24-471F-9382-0DE7DCADF2E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Provisioning", "Quick.Onvif.Provisioning\Quick.Onvif.Provisioning.csproj", "{80448985-4DD6-422A-B548-DF5EA71305A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Provisioning", "Quick.Onvif.Provisioning\Quick.Onvif.Provisioning.csproj", "{80448985-4DD6-422A-B548-DF5EA71305A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.PTZ", "Quick.Onvif.PTZ\Quick.Onvif.PTZ.csproj", "{2919C94A-DD90-4BE6-87D6-8D3C1839EAF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.PTZ", "Quick.Onvif.PTZ\Quick.Onvif.PTZ.csproj", "{2919C94A-DD90-4BE6-87D6-8D3C1839EAF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Receiver", "Quick.Onvif.Receiver\Quick.Onvif.Receiver.csproj", "{21A386CC-E30C-4D8B-ACAD-E12F02606AFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Receiver", "Quick.Onvif.Receiver\Quick.Onvif.Receiver.csproj", "{21A386CC-E30C-4D8B-ACAD-E12F02606AFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.RecordingControl", "Quick.Onvif.RecordingControl\Quick.Onvif.RecordingControl.csproj", "{355204D8-35BB-481B-BB1C-9112634162F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.RecordingControl", "Quick.Onvif.RecordingControl\Quick.Onvif.RecordingControl.csproj", "{355204D8-35BB-481B-BB1C-9112634162F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.RecordingSearch", "Quick.Onvif.RecordingSearch\Quick.Onvif.RecordingSearch.csproj", "{0D6A8A35-02A4-4BCD-872D-420DE8D2775C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.RecordingSearch", "Quick.Onvif.RecordingSearch\Quick.Onvif.RecordingSearch.csproj", "{0D6A8A35-02A4-4BCD-872D-420DE8D2775C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.ReplayControl", "Quick.Onvif.ReplayControl\Quick.Onvif.ReplayControl.csproj", "{65D8F36B-B599-4CF9-8DB1-7351BB7DC88E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.ReplayControl", "Quick.Onvif.ReplayControl\Quick.Onvif.ReplayControl.csproj", "{65D8F36B-B599-4CF9-8DB1-7351BB7DC88E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Schedule", "Quick.Onvif.Schedule\Quick.Onvif.Schedule.csproj", "{73D4CA71-EE79-4056-8C26-68557EA243B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Schedule", "Quick.Onvif.Schedule\Quick.Onvif.Schedule.csproj", "{73D4CA71-EE79-4056-8C26-68557EA243B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Security", "Quick.Onvif.Security\Quick.Onvif.Security.csproj", "{F14CCCBD-BC32-46C3-B1DF-80667F21BE1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Security", "Quick.Onvif.Security\Quick.Onvif.Security.csproj", "{F14CCCBD-BC32-46C3-B1DF-80667F21BE1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Thermal", "Quick.Onvif.Thermal\Quick.Onvif.Thermal.csproj", "{5CC0BF37-65EE-4F42-A9FD-1C0D5ADE3634}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Thermal", "Quick.Onvif.Thermal\Quick.Onvif.Thermal.csproj", "{5CC0BF37-65EE-4F42-A9FD-1C0D5ADE3634}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.Uplink", "Quick.Onvif.Uplink\Quick.Onvif.Uplink.csproj", "{6387CBEE-4FA9-461D-A97B-387CAAB3FE5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Uplink", "Quick.Onvif.Uplink\Quick.Onvif.Uplink.csproj", "{6387CBEE-4FA9-461D-A97B-387CAAB3FE5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif", "Quick.Onvif\Quick.Onvif.csproj", "{5E193505-FA33-43E8-8C55-26A12557206D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif", "Quick.Onvif\Quick.Onvif.csproj", "{5E193505-FA33-43E8-8C55-26A12557206D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.TestUI", "Quick.Onvif.TestUI\Quick.Onvif.TestUI.csproj", "{0BD325A1-F32A-4F47-975C-9B8E0F8EF066}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -153,6 +155,10 @@ Global
 		{5E193505-FA33-43E8-8C55-26A12557206D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E193505-FA33-43E8-8C55-26A12557206D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E193505-FA33-43E8-8C55-26A12557206D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BD325A1-F32A-4F47-975C-9B8E0F8EF066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BD325A1-F32A-4F47-975C-9B8E0F8EF066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BD325A1-F32A-4F47-975C-9B8E0F8EF066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BD325A1-F32A-4F47-975C-9B8E0F8EF066}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

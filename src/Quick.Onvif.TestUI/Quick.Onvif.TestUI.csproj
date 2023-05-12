@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Quick.Onvif.Imaging\Quick.Onvif.Imaging.csproj" />
+    <ProjectReference Include="..\Quick.Onvif.Media\Quick.Onvif.Media.csproj" />
+    <ProjectReference Include="..\Quick.Onvif\Quick.Onvif.csproj" />
+  </ItemGroup>
+
+</Project>
