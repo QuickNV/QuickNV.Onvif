@@ -19,9 +19,12 @@ namespace Quick.Onvif.TestUI
             this.client = client;
             InitializeComponent();
             Text = $"{client.DeviceInformation.Manufacturer} - {client.DeviceInformation.Model} - {client.DeviceServiceAddressUri}";
-            odcDevice.RefreshAsyncFunc = async () => await client.DeviceClient.GetDeviceInformationAsync(new Device.GetDeviceInformationRequest());
-            odcNetwork.RefreshAsyncFunc = async () => await client.DeviceClient.GetNetworkInterfacesAsync();
-
+            odcDeviceInformation.FirstValueAsyncFunc = () => Task.FromResult<object>(client.DeviceInformation);
+            odcDeviceCapabilities.FirstValueAsyncFunc = () => Task.FromResult<object>(client.Capabilities);
+            odcNetworkInterfaces.RefreshAsyncFunc = async () => await client.DeviceClient.GetNetworkInterfacesAsync();
+            odcNetworkProtocols.RefreshAsyncFunc = async () => await client.DeviceClient.GetNetworkProtocolsAsync();
+            odcNetworkDefaultGateway.RefreshAsyncFunc = async () => await client.DeviceClient.GetNetworkDefaultGatewayAsync();
+            odcDNS.RefreshAsyncFunc = async () => await client.DeviceClient.GetDNSAsync();
         }
     }
 }

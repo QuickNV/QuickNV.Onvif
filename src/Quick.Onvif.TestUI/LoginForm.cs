@@ -32,7 +32,7 @@ namespace Quick.Onvif.TestUI
                 await client.ConnectAsync();
                 this.Hide();
                 new MainForm(client).ShowDialog();
-                this.Show();
+                this.Close();
             }
             catch (Exception ex)
             {

@@ -49,52 +49,58 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(6, 3);
+            label1.Location = new Point(8, 4);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(207, 24);
+            label1.Size = new Size(279, 31);
             label1.TabIndex = 0;
             label1.Text = "Device Service Address";
             // 
             // txtDeviceServiceAddress
             // 
             txtDeviceServiceAddress.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtDeviceServiceAddress.Location = new Point(6, 30);
+            txtDeviceServiceAddress.Location = new Point(8, 39);
+            txtDeviceServiceAddress.Margin = new Padding(4, 4, 4, 4);
             txtDeviceServiceAddress.Name = "txtDeviceServiceAddress";
-            txtDeviceServiceAddress.Size = new Size(543, 30);
+            txtDeviceServiceAddress.Size = new Size(686, 38);
             txtDeviceServiceAddress.TabIndex = 1;
             // 
             // txtUserName
             // 
             txtUserName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtUserName.Location = new Point(6, 90);
+            txtUserName.Location = new Point(8, 116);
+            txtUserName.Margin = new Padding(4, 4, 4, 4);
             txtUserName.Name = "txtUserName";
-            txtUserName.Size = new Size(543, 30);
+            txtUserName.Size = new Size(686, 38);
             txtUserName.TabIndex = 3;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(6, 63);
+            label2.Location = new Point(8, 81);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(100, 24);
+            label2.Size = new Size(135, 31);
             label2.TabIndex = 2;
             label2.Text = "UserName";
             // 
             // txtPassword
             // 
             txtPassword.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtPassword.Location = new Point(6, 150);
+            txtPassword.Location = new Point(8, 194);
+            txtPassword.Margin = new Padding(4, 4, 4, 4);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '●';
-            txtPassword.Size = new Size(543, 30);
+            txtPassword.Size = new Size(686, 38);
             txtPassword.TabIndex = 5;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(6, 123);
+            label3.Location = new Point(8, 159);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(91, 24);
+            label3.Size = new Size(122, 31);
             label3.TabIndex = 4;
             label3.Text = "Password";
             // 
@@ -103,10 +109,11 @@
             tcConnectInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tcConnectInfo.Controls.Add(tabPage1);
             tcConnectInfo.Controls.Add(tabPage2);
-            tcConnectInfo.Location = new Point(12, 12);
+            tcConnectInfo.Location = new Point(15, 16);
+            tcConnectInfo.Margin = new Padding(4, 4, 4, 4);
             tcConnectInfo.Name = "tcConnectInfo";
             tcConnectInfo.SelectedIndex = 0;
-            tcConnectInfo.Size = new Size(563, 251);
+            tcConnectInfo.Size = new Size(717, 324);
             tcConnectInfo.TabIndex = 6;
             // 
             // tabPage1
@@ -117,10 +124,11 @@
             tabPage1.Controls.Add(label3);
             tabPage1.Controls.Add(label2);
             tabPage1.Controls.Add(txtUserName);
-            tabPage1.Location = new Point(4, 33);
+            tabPage1.Location = new Point(8, 45);
+            tabPage1.Margin = new Padding(4, 4, 4, 4);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(555, 214);
+            tabPage1.Padding = new Padding(4, 4, 4, 4);
+            tabPage1.Size = new Size(701, 271);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Basic";
             tabPage1.UseVisualStyleBackColor = true;
@@ -129,10 +137,11 @@
             // 
             tabPage2.Controls.Add(nudRtspPort);
             tabPage2.Controls.Add(label4);
-            tabPage2.Location = new Point(4, 33);
+            tabPage2.Location = new Point(8, 45);
+            tabPage2.Margin = new Padding(4, 4, 4, 4);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(555, 214);
+            tabPage2.Padding = new Padding(4, 4, 4, 4);
+            tabPage2.Size = new Size(701, 271);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Advance";
             tabPage2.UseVisualStyleBackColor = true;
@@ -140,27 +149,30 @@
             // nudRtspPort
             // 
             nudRtspPort.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            nudRtspPort.Location = new Point(6, 30);
+            nudRtspPort.Location = new Point(8, 39);
+            nudRtspPort.Margin = new Padding(4, 4, 4, 4);
             nudRtspPort.Maximum = new decimal(new int[] { 65536, 0, 0, 0 });
             nudRtspPort.Name = "nudRtspPort";
-            nudRtspPort.Size = new Size(543, 30);
+            nudRtspPort.Size = new Size(686, 38);
             nudRtspPort.TabIndex = 3;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(6, 3);
+            label4.Location = new Point(8, 4);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(94, 24);
+            label4.Size = new Size(128, 31);
             label4.TabIndex = 2;
             label4.Text = "RTSP Port";
             // 
             // btnLogin
             // 
             btnLogin.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnLogin.Location = new Point(12, 269);
+            btnLogin.Location = new Point(15, 347);
+            btnLogin.Margin = new Padding(4, 4, 4, 4);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(217, 46);
+            btnLogin.Size = new Size(276, 59);
             btnLogin.TabIndex = 7;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
@@ -168,12 +180,14 @@
             // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(11F, 24F);
+            AcceptButton = btnLogin;
+            AutoScaleDimensions = new SizeF(14F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(587, 327);
+            ClientSize = new Size(747, 422);
             Controls.Add(btnLogin);
             Controls.Add(tcConnectInfo);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4, 4, 4, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "LoginForm";

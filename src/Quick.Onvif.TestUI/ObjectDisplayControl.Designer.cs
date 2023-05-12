@@ -29,21 +29,22 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ObjectDisplayControl));
-            toolStrip1 = new ToolStrip();
+            tsMain = new ToolStrip();
             btnRefresh = new ToolStripButton();
             txtContent = new TextBox();
-            toolStrip1.SuspendLayout();
+            tsMain.SuspendLayout();
             SuspendLayout();
             // 
-            // toolStrip1
+            // tsMain
             // 
-            toolStrip1.ImageScalingSize = new Size(24, 24);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnRefresh });
-            toolStrip1.Location = new Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(649, 33);
-            toolStrip1.TabIndex = 0;
-            toolStrip1.Text = "toolStrip1";
+            tsMain.ImageScalingSize = new Size(24, 24);
+            tsMain.Items.AddRange(new ToolStripItem[] { btnRefresh });
+            tsMain.Location = new Point(0, 0);
+            tsMain.Name = "tsMain";
+            tsMain.Padding = new Padding(0, 0, 3, 0);
+            tsMain.Size = new Size(826, 41);
+            tsMain.TabIndex = 0;
+            tsMain.Text = "toolStrip1";
             // 
             // btnRefresh
             // 
@@ -51,39 +52,41 @@
             btnRefresh.Image = (Image)resources.GetObject("btnRefresh.Image");
             btnRefresh.ImageTransparentColor = Color.Magenta;
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(78, 28);
+            btnRefresh.Size = new Size(105, 35);
             btnRefresh.Text = "Refresh";
             btnRefresh.Click += btnRefresh_Click;
             // 
             // txtContent
             // 
             txtContent.Dock = DockStyle.Fill;
-            txtContent.Location = new Point(0, 33);
+            txtContent.Location = new Point(0, 41);
+            txtContent.Margin = new Padding(4, 4, 4, 4);
             txtContent.Multiline = true;
             txtContent.Name = "txtContent";
             txtContent.ReadOnly = true;
             txtContent.ScrollBars = ScrollBars.Vertical;
-            txtContent.Size = new Size(649, 448);
+            txtContent.Size = new Size(826, 580);
             txtContent.TabIndex = 1;
             // 
             // ObjectDisplayControl
             // 
-            AutoScaleDimensions = new SizeF(11F, 24F);
+            AutoScaleDimensions = new SizeF(14F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(txtContent);
-            Controls.Add(toolStrip1);
+            Controls.Add(tsMain);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "ObjectDisplayControl";
-            Size = new Size(649, 481);
+            Size = new Size(826, 621);
             Load += ObjectDisplayControl_Load;
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
+            tsMain.ResumeLayout(false);
+            tsMain.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ToolStrip toolStrip1;
+        private ToolStrip tsMain;
         private ToolStripButton btnRefresh;
         private TextBox txtContent;
     }

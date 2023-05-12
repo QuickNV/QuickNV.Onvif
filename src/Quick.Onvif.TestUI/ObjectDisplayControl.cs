@@ -13,11 +13,17 @@ namespace Quick.Onvif.TestUI
 {
     public partial class ObjectDisplayControl : UserControl
     {
+        public Func<Task<object>> FirstValueAsyncFunc { get; set; }
         public Func<Task<object>> RefreshAsyncFunc { get; set; }
 
         public ObjectDisplayControl()
         {
             InitializeComponent();
+        }
+
+        private string object2string(object obj)
+        {
+            return JsonConvert.SerializeObject(obj, Formatting.Indented);
         }
 
         private async Task refreshAsync()
@@ -33,7 +39,7 @@ namespace Quick.Onvif.TestUI
                 try
                 {
                     var obj = await RefreshAsyncFunc.Invoke();
-                    txtContent.Text = JsonConvert.SerializeObject(obj, Formatting.Indented);
+                    txtContent.Text = object2string(obj);
                 }
                 catch (Exception ex)
                 {
@@ -50,7 +56,12 @@ namespace Quick.Onvif.TestUI
 
         private async void ObjectDisplayControl_Load(object sender, EventArgs e)
         {
-            await refreshAsync();
+            if (FirstValueAsyncFunc == null)
+                await refreshAsync();
+            else
+                txtContent.Text = object2string(await FirstValueAsyncFunc.Invoke());
+            if (RefreshAsyncFunc == null)
+                Controls.Remove(tsMain);
         }
     }
 }
