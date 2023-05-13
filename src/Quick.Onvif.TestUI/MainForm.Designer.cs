@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             tcMain = new TabControl();
             tpDevice = new TabPage();
             tabControl2 = new TabControl();
             tpDeviceInformation = new TabPage();
             odcDeviceInformation = new ObjectDisplayControl();
             tpDeviceCapabilities = new TabPage();
+            odcDeviceCapabilities = new ObjectDisplayControl();
             tpNetwork = new TabPage();
             tabControl1 = new TabControl();
             tpNetworkInterfaces = new TabPage();
@@ -44,7 +46,6 @@
             odcNetworkDefaultGateway = new ObjectDisplayControl();
             tpNetworkDNS = new TabPage();
             odcDNS = new ObjectDisplayControl();
-            odcDeviceCapabilities = new ObjectDisplayControl();
             tcMain.SuspendLayout();
             tpDevice.SuspendLayout();
             tabControl2.SuspendLayout();
@@ -125,6 +126,17 @@
             tpDeviceCapabilities.TabIndex = 1;
             tpDeviceCapabilities.Text = "Capabilities";
             tpDeviceCapabilities.UseVisualStyleBackColor = true;
+            // 
+            // odcDeviceCapabilities
+            // 
+            odcDeviceCapabilities.Dock = DockStyle.Fill;
+            odcDeviceCapabilities.FirstValueAsyncFunc = null;
+            odcDeviceCapabilities.Location = new Point(3, 3);
+            odcDeviceCapabilities.Margin = new Padding(5);
+            odcDeviceCapabilities.Name = "odcDeviceCapabilities";
+            odcDeviceCapabilities.RefreshAsyncFunc = null;
+            odcDeviceCapabilities.Size = new Size(1241, 689);
+            odcDeviceCapabilities.TabIndex = 1;
             // 
             // tpNetwork
             // 
@@ -239,23 +251,13 @@
             odcDNS.Size = new Size(1241, 689);
             odcDNS.TabIndex = 3;
             // 
-            // odcDeviceCapabilities
-            // 
-            odcDeviceCapabilities.Dock = DockStyle.Fill;
-            odcDeviceCapabilities.FirstValueAsyncFunc = null;
-            odcDeviceCapabilities.Location = new Point(3, 3);
-            odcDeviceCapabilities.Margin = new Padding(5);
-            odcDeviceCapabilities.Name = "odcDeviceCapabilities";
-            odcDeviceCapabilities.RefreshAsyncFunc = null;
-            odcDeviceCapabilities.Size = new Size(1241, 689);
-            odcDeviceCapabilities.TabIndex = 1;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(14F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1287, 809);
             Controls.Add(tcMain);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;

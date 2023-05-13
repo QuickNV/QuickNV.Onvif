@@ -56,12 +56,17 @@ namespace Quick.Onvif.TestUI
 
         private async void ObjectDisplayControl_Load(object sender, EventArgs e)
         {
-            if (FirstValueAsyncFunc == null)
-                await refreshAsync();
-            else
+            if (FirstValueAsyncFunc != null)
+            {
                 txtContent.Text = object2string(await FirstValueAsyncFunc.Invoke());
-            if (RefreshAsyncFunc == null)
-                Controls.Remove(tsMain);
+                return;
+            }
+            if (RefreshAsyncFunc != null)
+            {
+                await refreshAsync();
+                return;
+            }
+            Controls.Remove(tsMain);
         }
     }
 }
