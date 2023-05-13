@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Connected Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Quick.Onvif.AccessControl\Quick.Onvif.AccessControl.csproj" />
     <ProjectReference Include="..\Quick.Onvif.ActionEngine\Quick.Onvif.ActionEngine.csproj" />
     <ProjectReference Include="..\Quick.Onvif.Analytics\Quick.Onvif.Analytics.csproj" />

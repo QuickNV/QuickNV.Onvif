@@ -31,14 +31,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ObjectDisplayControl));
             tsMain = new ToolStrip();
             btnRefresh = new ToolStripButton();
-            txtContent = new TextBox();
+            toolStripSeparator1 = new ToolStripSeparator();
+            toolStripLabel1 = new ToolStripLabel();
+            cbView = new ToolStripComboBox();
+            pnlContent = new Panel();
             tsMain.SuspendLayout();
             SuspendLayout();
             // 
             // tsMain
             // 
+            tsMain.GripStyle = ToolStripGripStyle.Hidden;
             tsMain.ImageScalingSize = new Size(24, 24);
-            tsMain.Items.AddRange(new ToolStripItem[] { btnRefresh });
+            tsMain.Items.AddRange(new ToolStripItem[] { btnRefresh, toolStripSeparator1, toolStripLabel1, cbView });
             tsMain.Location = new Point(0, 0);
             tsMain.Name = "tsMain";
             tsMain.Padding = new Padding(0, 0, 3, 0);
@@ -56,25 +60,40 @@
             btnRefresh.Text = "Refresh";
             btnRefresh.Click += btnRefresh_Click;
             // 
-            // txtContent
+            // toolStripSeparator1
             // 
-            txtContent.Dock = DockStyle.Fill;
-            txtContent.Location = new Point(0, 41);
-            txtContent.Margin = new Padding(4, 4, 4, 4);
-            txtContent.Multiline = true;
-            txtContent.Name = "txtContent";
-            txtContent.ReadOnly = true;
-            txtContent.ScrollBars = ScrollBars.Vertical;
-            txtContent.Size = new Size(826, 580);
-            txtContent.TabIndex = 1;
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 41);
+            // 
+            // toolStripLabel1
+            // 
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new Size(75, 35);
+            toolStripLabel1.Text = "View:";
+            // 
+            // cbView
+            // 
+            cbView.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbView.Items.AddRange(new object[] { "Tree", "JSON", "XML" });
+            cbView.Name = "cbView";
+            cbView.Size = new Size(121, 41);
+            cbView.SelectedIndexChanged += cbView_SelectedIndexChanged;
+            // 
+            // pnlContent
+            // 
+            pnlContent.Dock = DockStyle.Fill;
+            pnlContent.Location = new Point(0, 41);
+            pnlContent.Name = "pnlContent";
+            pnlContent.Size = new Size(826, 580);
+            pnlContent.TabIndex = 1;
             // 
             // ObjectDisplayControl
             // 
             AutoScaleDimensions = new SizeF(14F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(txtContent);
+            Controls.Add(pnlContent);
             Controls.Add(tsMain);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "ObjectDisplayControl";
             Size = new Size(826, 621);
             Load += ObjectDisplayControl_Load;
@@ -88,6 +107,9 @@
 
         private ToolStrip tsMain;
         private ToolStripButton btnRefresh;
-        private TextBox txtContent;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripLabel toolStripLabel1;
+        private ToolStripComboBox cbView;
+        private Panel pnlContent;
     }
 }
