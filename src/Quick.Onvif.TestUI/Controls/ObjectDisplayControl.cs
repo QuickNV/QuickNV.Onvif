@@ -4,7 +4,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Quick.Onvif.TestUI
+namespace Quick.Onvif.TestUI.Controls
 {
     public partial class ObjectDisplayControl : UserControl
     {
@@ -41,7 +41,7 @@ namespace Quick.Onvif.TestUI
                 }
                 else if (child is XmlElement xe)
                 {
-                    sb.Append($"{string.Empty.PadLeft(level * 4)}{xe.Name}: ");
+                    sb.Append($"{string.Empty.PadLeft(level * 4)}{xe.LocalName}: ");
                     if (xe.ChildNodes.Count != 1 || !(xe.FirstChild is XmlText))
                         sb.AppendLine();
                     sb.Append(xmlElementToString(xe, level + 1));
@@ -50,7 +50,7 @@ namespace Quick.Onvif.TestUI
                 }
                 else if (child is XmlAttribute xa)
                 {
-                    sb.AppendLine($"{string.Empty.PadLeft(level * 4)}{xa.Name}: {xa.Value}");
+                    sb.AppendLine($"{string.Empty.PadLeft(level * 4)}{xa.LocalName}: {xa.Value}");
                 }
             }
             return sb.ToString();
@@ -126,7 +126,7 @@ namespace Quick.Onvif.TestUI
                 TreeNode childTreeNode = new TreeNode();
                 if (childNode.ChildNodes.Count > 0)
                     childTreeNode = XmlElement2TreeNode(childEl);
-                childTreeNode.Text = childNode.Name;
+                childTreeNode.Text = childNode.LocalName;
                 treeNode.Nodes.Add(childTreeNode);
             }
             return treeNode;

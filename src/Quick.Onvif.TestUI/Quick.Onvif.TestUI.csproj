@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Quick.Onvif.Imaging\Quick.Onvif.Imaging.csproj" />
     <ProjectReference Include="..\Quick.Onvif.Media\Quick.Onvif.Media.csproj" />
+    <ProjectReference Include="..\Quick.Onvif.PTZ\Quick.Onvif.PTZ.csproj" />
     <ProjectReference Include="..\Quick.Onvif\Quick.Onvif.csproj" />
   </ItemGroup>
 

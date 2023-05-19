@@ -33,19 +33,25 @@
             tpDevice = new TabPage();
             tabControl2 = new TabControl();
             tpDeviceInformation = new TabPage();
-            odcDeviceInformation = new ObjectDisplayControl();
+            odcDeviceInformation = new Controls.ObjectDisplayControl();
             tpDeviceCapabilities = new TabPage();
-            odcDeviceCapabilities = new ObjectDisplayControl();
+            odcDeviceCapabilities = new Controls.ObjectDisplayControl();
             tpNetwork = new TabPage();
             tabControl1 = new TabControl();
             tpNetworkInterfaces = new TabPage();
-            odcNetworkInterfaces = new ObjectDisplayControl();
+            odcNetworkInterfaces = new Controls.ObjectDisplayControl();
             tpNetworkProtocols = new TabPage();
-            odcNetworkProtocols = new ObjectDisplayControl();
+            odcNetworkProtocols = new Controls.ObjectDisplayControl();
             tpNetworkDefaultGateway = new TabPage();
-            odcNetworkDefaultGateway = new ObjectDisplayControl();
+            odcNetworkDefaultGateway = new Controls.ObjectDisplayControl();
             tpNetworkDNS = new TabPage();
-            odcDNS = new ObjectDisplayControl();
+            odcDNS = new Controls.ObjectDisplayControl();
+            tpMedia = new TabPage();
+            tabControl3 = new TabControl();
+            tpMediaProfiles = new TabPage();
+            odcMediaProfiles = new Controls.ObjectDisplayControl();
+            tpMediaVideoSources = new TabPage();
+            odcMediaVideoSources = new Controls.ObjectDisplayControl();
             tcMain.SuspendLayout();
             tpDevice.SuspendLayout();
             tabControl2.SuspendLayout();
@@ -57,18 +63,23 @@
             tpNetworkProtocols.SuspendLayout();
             tpNetworkDefaultGateway.SuspendLayout();
             tpNetworkDNS.SuspendLayout();
+            tpMedia.SuspendLayout();
+            tabControl3.SuspendLayout();
+            tpMediaProfiles.SuspendLayout();
+            tpMediaVideoSources.SuspendLayout();
             SuspendLayout();
             // 
             // tcMain
             // 
             tcMain.Controls.Add(tpDevice);
             tcMain.Controls.Add(tpNetwork);
+            tcMain.Controls.Add(tpMedia);
             tcMain.Dock = DockStyle.Fill;
             tcMain.Location = new Point(0, 0);
             tcMain.Margin = new Padding(4);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(1287, 809);
+            tcMain.Size = new Size(1468, 944);
             tcMain.TabIndex = 0;
             // 
             // tpDevice
@@ -78,7 +89,7 @@
             tpDevice.Margin = new Padding(4);
             tpDevice.Name = "tpDevice";
             tpDevice.Padding = new Padding(4);
-            tpDevice.Size = new Size(1271, 756);
+            tpDevice.Size = new Size(1452, 891);
             tpDevice.TabIndex = 0;
             tpDevice.Text = "Device";
             tpDevice.UseVisualStyleBackColor = true;
@@ -91,7 +102,7 @@
             tabControl2.Location = new Point(4, 4);
             tabControl2.Name = "tabControl2";
             tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new Size(1263, 748);
+            tabControl2.Size = new Size(1444, 883);
             tabControl2.TabIndex = 1;
             // 
             // tpDeviceInformation
@@ -100,7 +111,7 @@
             tpDeviceInformation.Location = new Point(8, 45);
             tpDeviceInformation.Name = "tpDeviceInformation";
             tpDeviceInformation.Padding = new Padding(3);
-            tpDeviceInformation.Size = new Size(1247, 695);
+            tpDeviceInformation.Size = new Size(1428, 830);
             tpDeviceInformation.TabIndex = 0;
             tpDeviceInformation.Text = "Information";
             tpDeviceInformation.UseVisualStyleBackColor = true;
@@ -113,7 +124,7 @@
             odcDeviceInformation.Margin = new Padding(5);
             odcDeviceInformation.Name = "odcDeviceInformation";
             odcDeviceInformation.RefreshAsyncFunc = null;
-            odcDeviceInformation.Size = new Size(1241, 689);
+            odcDeviceInformation.Size = new Size(1422, 824);
             odcDeviceInformation.TabIndex = 0;
             // 
             // tpDeviceCapabilities
@@ -145,7 +156,7 @@
             tpNetwork.Margin = new Padding(4);
             tpNetwork.Name = "tpNetwork";
             tpNetwork.Padding = new Padding(4);
-            tpNetwork.Size = new Size(1271, 756);
+            tpNetwork.Size = new Size(1452, 891);
             tpNetwork.TabIndex = 1;
             tpNetwork.Text = "Network";
             tpNetwork.UseVisualStyleBackColor = true;
@@ -160,7 +171,7 @@
             tabControl1.Location = new Point(4, 4);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1263, 748);
+            tabControl1.Size = new Size(1444, 883);
             tabControl1.TabIndex = 1;
             // 
             // tpNetworkInterfaces
@@ -169,7 +180,7 @@
             tpNetworkInterfaces.Location = new Point(8, 45);
             tpNetworkInterfaces.Name = "tpNetworkInterfaces";
             tpNetworkInterfaces.Padding = new Padding(3);
-            tpNetworkInterfaces.Size = new Size(1247, 695);
+            tpNetworkInterfaces.Size = new Size(1428, 830);
             tpNetworkInterfaces.TabIndex = 0;
             tpNetworkInterfaces.Text = "Interfaces";
             tpNetworkInterfaces.UseVisualStyleBackColor = true;
@@ -182,7 +193,7 @@
             odcNetworkInterfaces.Margin = new Padding(5);
             odcNetworkInterfaces.Name = "odcNetworkInterfaces";
             odcNetworkInterfaces.RefreshAsyncFunc = null;
-            odcNetworkInterfaces.Size = new Size(1241, 689);
+            odcNetworkInterfaces.Size = new Size(1422, 824);
             odcNetworkInterfaces.TabIndex = 0;
             // 
             // tpNetworkProtocols
@@ -251,11 +262,76 @@
             odcDNS.Size = new Size(1241, 689);
             odcDNS.TabIndex = 3;
             // 
+            // tpMedia
+            // 
+            tpMedia.Controls.Add(tabControl3);
+            tpMedia.Location = new Point(8, 45);
+            tpMedia.Name = "tpMedia";
+            tpMedia.Size = new Size(1452, 891);
+            tpMedia.TabIndex = 2;
+            tpMedia.Text = "Media";
+            tpMedia.UseVisualStyleBackColor = true;
+            // 
+            // tabControl3
+            // 
+            tabControl3.Controls.Add(tpMediaVideoSources);
+            tabControl3.Controls.Add(tpMediaProfiles);
+            tabControl3.Dock = DockStyle.Fill;
+            tabControl3.Location = new Point(0, 0);
+            tabControl3.Name = "tabControl3";
+            tabControl3.SelectedIndex = 0;
+            tabControl3.Size = new Size(1452, 891);
+            tabControl3.TabIndex = 2;
+            // 
+            // tpMediaProfiles
+            // 
+            tpMediaProfiles.Controls.Add(odcMediaProfiles);
+            tpMediaProfiles.Location = new Point(8, 45);
+            tpMediaProfiles.Name = "tpMediaProfiles";
+            tpMediaProfiles.Padding = new Padding(3);
+            tpMediaProfiles.Size = new Size(1436, 838);
+            tpMediaProfiles.TabIndex = 0;
+            tpMediaProfiles.Text = "Profiles";
+            tpMediaProfiles.UseVisualStyleBackColor = true;
+            // 
+            // odcMediaProfiles
+            // 
+            odcMediaProfiles.Dock = DockStyle.Fill;
+            odcMediaProfiles.FirstValueAsyncFunc = null;
+            odcMediaProfiles.Location = new Point(3, 3);
+            odcMediaProfiles.Margin = new Padding(5);
+            odcMediaProfiles.Name = "odcMediaProfiles";
+            odcMediaProfiles.RefreshAsyncFunc = null;
+            odcMediaProfiles.Size = new Size(1430, 832);
+            odcMediaProfiles.TabIndex = 0;
+            // 
+            // tpMediaVideoSources
+            // 
+            tpMediaVideoSources.Controls.Add(odcMediaVideoSources);
+            tpMediaVideoSources.Location = new Point(8, 45);
+            tpMediaVideoSources.Name = "tpMediaVideoSources";
+            tpMediaVideoSources.Padding = new Padding(3);
+            tpMediaVideoSources.Size = new Size(1436, 838);
+            tpMediaVideoSources.TabIndex = 1;
+            tpMediaVideoSources.Text = "VideoSources";
+            tpMediaVideoSources.UseVisualStyleBackColor = true;
+            // 
+            // odcMediaVideoSources
+            // 
+            odcMediaVideoSources.Dock = DockStyle.Fill;
+            odcMediaVideoSources.FirstValueAsyncFunc = null;
+            odcMediaVideoSources.Location = new Point(3, 3);
+            odcMediaVideoSources.Margin = new Padding(5);
+            odcMediaVideoSources.Name = "odcMediaVideoSources";
+            odcMediaVideoSources.RefreshAsyncFunc = null;
+            odcMediaVideoSources.Size = new Size(1430, 832);
+            odcMediaVideoSources.TabIndex = 1;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(14F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1287, 809);
+            ClientSize = new Size(1468, 944);
             Controls.Add(tcMain);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
@@ -273,6 +349,10 @@
             tpNetworkProtocols.ResumeLayout(false);
             tpNetworkDefaultGateway.ResumeLayout(false);
             tpNetworkDNS.ResumeLayout(false);
+            tpMedia.ResumeLayout(false);
+            tabControl3.ResumeLayout(false);
+            tpMediaProfiles.ResumeLayout(false);
+            tpMediaVideoSources.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -281,19 +361,25 @@
         private TabControl tcMain;
         private TabPage tpDevice;
         private TabPage tpNetwork;
-        private ObjectDisplayControl odcDeviceInformation;
-        private ObjectDisplayControl odcNetworkInterfaces;
+        private Controls.ObjectDisplayControl odcDeviceInformation;
+        private Controls.ObjectDisplayControl odcNetworkInterfaces;
         private TabControl tabControl1;
         private TabPage tpNetworkInterfaces;
         private TabPage tpNetworkProtocols;
         private TabPage tpNetworkDefaultGateway;
-        private ObjectDisplayControl odcNetworkProtocols;
-        private ObjectDisplayControl odcNetworkDefaultGateway;
+        private Controls.ObjectDisplayControl odcNetworkProtocols;
+        private Controls.ObjectDisplayControl odcNetworkDefaultGateway;
         private TabPage tpNetworkDNS;
-        private ObjectDisplayControl odcDNS;
+        private Controls.ObjectDisplayControl odcDNS;
         private TabControl tabControl2;
         private TabPage tpDeviceInformation;
         private TabPage tpDeviceCapabilities;
-        private ObjectDisplayControl odcDeviceCapabilities;
+        private Controls.ObjectDisplayControl odcDeviceCapabilities;
+        private TabPage tpMedia;
+        private TabControl tabControl3;
+        private TabPage tpMediaProfiles;
+        private Controls.ObjectDisplayControl odcMediaProfiles;
+        private TabPage tpMediaVideoSources;
+        private Controls.ObjectDisplayControl odcMediaVideoSources;
     }
 }

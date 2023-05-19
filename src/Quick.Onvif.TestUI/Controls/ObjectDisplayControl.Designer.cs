@@ -1,4 +1,4 @@
-﻿namespace Quick.Onvif.TestUI
+﻿namespace Quick.Onvif.TestUI.Controls
 {
     partial class ObjectDisplayControl
     {
