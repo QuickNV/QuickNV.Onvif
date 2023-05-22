@@ -48,10 +48,20 @@
             odcDNS = new Controls.ObjectDisplayControl();
             tpMedia = new TabPage();
             tabControl3 = new TabControl();
-            tpMediaProfiles = new TabPage();
-            odcMediaProfiles = new Controls.ObjectDisplayControl();
+            tpMediaVideoSourceConfigurations = new TabPage();
+            odcMediaVideoSourceConfigurations = new Controls.ObjectDisplayControl();
             tpMediaVideoSources = new TabPage();
             odcMediaVideoSources = new Controls.ObjectDisplayControl();
+            tpMediaProfiles = new TabPage();
+            odcMediaProfiles = new Controls.ObjectDisplayControl();
+            tpPreview = new TabPage();
+            scPreview = new SplitContainer();
+            gbPreviewProfile = new GroupBox();
+            pnlProfileInfo = new Panel();
+            btnPreviewLive = new Button();
+            txtPreviewProfileInfo = new TextBox();
+            btnPreviewSnapshot = new Button();
+            cbProfiles = new ComboBox();
             tcMain.SuspendLayout();
             tpDevice.SuspendLayout();
             tabControl2.SuspendLayout();
@@ -65,8 +75,15 @@
             tpNetworkDNS.SuspendLayout();
             tpMedia.SuspendLayout();
             tabControl3.SuspendLayout();
-            tpMediaProfiles.SuspendLayout();
+            tpMediaVideoSourceConfigurations.SuspendLayout();
             tpMediaVideoSources.SuspendLayout();
+            tpMediaProfiles.SuspendLayout();
+            tpPreview.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)scPreview).BeginInit();
+            scPreview.Panel1.SuspendLayout();
+            scPreview.SuspendLayout();
+            gbPreviewProfile.SuspendLayout();
+            pnlProfileInfo.SuspendLayout();
             SuspendLayout();
             // 
             // tcMain
@@ -74,6 +91,7 @@
             tcMain.Controls.Add(tpDevice);
             tcMain.Controls.Add(tpNetwork);
             tcMain.Controls.Add(tpMedia);
+            tcMain.Controls.Add(tpPreview);
             tcMain.Dock = DockStyle.Fill;
             tcMain.Location = new Point(0, 0);
             tcMain.Margin = new Padding(4);
@@ -133,7 +151,7 @@
             tpDeviceCapabilities.Location = new Point(8, 45);
             tpDeviceCapabilities.Name = "tpDeviceCapabilities";
             tpDeviceCapabilities.Padding = new Padding(3);
-            tpDeviceCapabilities.Size = new Size(1247, 695);
+            tpDeviceCapabilities.Size = new Size(1428, 830);
             tpDeviceCapabilities.TabIndex = 1;
             tpDeviceCapabilities.Text = "Capabilities";
             tpDeviceCapabilities.UseVisualStyleBackColor = true;
@@ -146,7 +164,7 @@
             odcDeviceCapabilities.Margin = new Padding(5);
             odcDeviceCapabilities.Name = "odcDeviceCapabilities";
             odcDeviceCapabilities.RefreshAsyncFunc = null;
-            odcDeviceCapabilities.Size = new Size(1241, 689);
+            odcDeviceCapabilities.Size = new Size(1422, 824);
             odcDeviceCapabilities.TabIndex = 1;
             // 
             // tpNetwork
@@ -202,7 +220,7 @@
             tpNetworkProtocols.Location = new Point(8, 45);
             tpNetworkProtocols.Name = "tpNetworkProtocols";
             tpNetworkProtocols.Padding = new Padding(3);
-            tpNetworkProtocols.Size = new Size(1247, 695);
+            tpNetworkProtocols.Size = new Size(1428, 830);
             tpNetworkProtocols.TabIndex = 1;
             tpNetworkProtocols.Text = "Protocols";
             tpNetworkProtocols.UseVisualStyleBackColor = true;
@@ -215,7 +233,7 @@
             odcNetworkProtocols.Margin = new Padding(5);
             odcNetworkProtocols.Name = "odcNetworkProtocols";
             odcNetworkProtocols.RefreshAsyncFunc = null;
-            odcNetworkProtocols.Size = new Size(1241, 689);
+            odcNetworkProtocols.Size = new Size(1422, 824);
             odcNetworkProtocols.TabIndex = 1;
             // 
             // tpNetworkDefaultGateway
@@ -224,7 +242,7 @@
             tpNetworkDefaultGateway.Location = new Point(8, 45);
             tpNetworkDefaultGateway.Name = "tpNetworkDefaultGateway";
             tpNetworkDefaultGateway.Padding = new Padding(3);
-            tpNetworkDefaultGateway.Size = new Size(1247, 695);
+            tpNetworkDefaultGateway.Size = new Size(1428, 830);
             tpNetworkDefaultGateway.TabIndex = 2;
             tpNetworkDefaultGateway.Text = "DefaultGateway";
             tpNetworkDefaultGateway.UseVisualStyleBackColor = true;
@@ -237,7 +255,7 @@
             odcNetworkDefaultGateway.Margin = new Padding(5);
             odcNetworkDefaultGateway.Name = "odcNetworkDefaultGateway";
             odcNetworkDefaultGateway.RefreshAsyncFunc = null;
-            odcNetworkDefaultGateway.Size = new Size(1241, 689);
+            odcNetworkDefaultGateway.Size = new Size(1422, 824);
             odcNetworkDefaultGateway.TabIndex = 2;
             // 
             // tpNetworkDNS
@@ -246,7 +264,7 @@
             tpNetworkDNS.Location = new Point(8, 45);
             tpNetworkDNS.Name = "tpNetworkDNS";
             tpNetworkDNS.Padding = new Padding(3);
-            tpNetworkDNS.Size = new Size(1247, 695);
+            tpNetworkDNS.Size = new Size(1428, 830);
             tpNetworkDNS.TabIndex = 3;
             tpNetworkDNS.Text = "DNS";
             tpNetworkDNS.UseVisualStyleBackColor = true;
@@ -259,7 +277,7 @@
             odcDNS.Margin = new Padding(5);
             odcDNS.Name = "odcDNS";
             odcDNS.RefreshAsyncFunc = null;
-            odcDNS.Size = new Size(1241, 689);
+            odcDNS.Size = new Size(1422, 824);
             odcDNS.TabIndex = 3;
             // 
             // tpMedia
@@ -274,6 +292,7 @@
             // 
             // tabControl3
             // 
+            tabControl3.Controls.Add(tpMediaVideoSourceConfigurations);
             tabControl3.Controls.Add(tpMediaVideoSources);
             tabControl3.Controls.Add(tpMediaProfiles);
             tabControl3.Dock = DockStyle.Fill;
@@ -282,6 +301,50 @@
             tabControl3.SelectedIndex = 0;
             tabControl3.Size = new Size(1452, 891);
             tabControl3.TabIndex = 2;
+            // 
+            // tpMediaVideoSourceConfigurations
+            // 
+            tpMediaVideoSourceConfigurations.Controls.Add(odcMediaVideoSourceConfigurations);
+            tpMediaVideoSourceConfigurations.Location = new Point(8, 45);
+            tpMediaVideoSourceConfigurations.Name = "tpMediaVideoSourceConfigurations";
+            tpMediaVideoSourceConfigurations.Padding = new Padding(3);
+            tpMediaVideoSourceConfigurations.Size = new Size(1436, 838);
+            tpMediaVideoSourceConfigurations.TabIndex = 2;
+            tpMediaVideoSourceConfigurations.Text = "VideoSourceConfigurations";
+            tpMediaVideoSourceConfigurations.UseVisualStyleBackColor = true;
+            // 
+            // odcMediaVideoSourceConfigurations
+            // 
+            odcMediaVideoSourceConfigurations.Dock = DockStyle.Fill;
+            odcMediaVideoSourceConfigurations.FirstValueAsyncFunc = null;
+            odcMediaVideoSourceConfigurations.Location = new Point(3, 3);
+            odcMediaVideoSourceConfigurations.Margin = new Padding(5);
+            odcMediaVideoSourceConfigurations.Name = "odcMediaVideoSourceConfigurations";
+            odcMediaVideoSourceConfigurations.RefreshAsyncFunc = null;
+            odcMediaVideoSourceConfigurations.Size = new Size(1430, 832);
+            odcMediaVideoSourceConfigurations.TabIndex = 2;
+            // 
+            // tpMediaVideoSources
+            // 
+            tpMediaVideoSources.Controls.Add(odcMediaVideoSources);
+            tpMediaVideoSources.Location = new Point(8, 45);
+            tpMediaVideoSources.Name = "tpMediaVideoSources";
+            tpMediaVideoSources.Padding = new Padding(3);
+            tpMediaVideoSources.Size = new Size(1436, 838);
+            tpMediaVideoSources.TabIndex = 1;
+            tpMediaVideoSources.Text = "VideoSources";
+            tpMediaVideoSources.UseVisualStyleBackColor = true;
+            // 
+            // odcMediaVideoSources
+            // 
+            odcMediaVideoSources.Dock = DockStyle.Fill;
+            odcMediaVideoSources.FirstValueAsyncFunc = null;
+            odcMediaVideoSources.Location = new Point(3, 3);
+            odcMediaVideoSources.Margin = new Padding(5);
+            odcMediaVideoSources.Name = "odcMediaVideoSources";
+            odcMediaVideoSources.RefreshAsyncFunc = null;
+            odcMediaVideoSources.Size = new Size(1430, 832);
+            odcMediaVideoSources.TabIndex = 1;
             // 
             // tpMediaProfiles
             // 
@@ -305,27 +368,99 @@
             odcMediaProfiles.Size = new Size(1430, 832);
             odcMediaProfiles.TabIndex = 0;
             // 
-            // tpMediaVideoSources
+            // tpPreview
             // 
-            tpMediaVideoSources.Controls.Add(odcMediaVideoSources);
-            tpMediaVideoSources.Location = new Point(8, 45);
-            tpMediaVideoSources.Name = "tpMediaVideoSources";
-            tpMediaVideoSources.Padding = new Padding(3);
-            tpMediaVideoSources.Size = new Size(1436, 838);
-            tpMediaVideoSources.TabIndex = 1;
-            tpMediaVideoSources.Text = "VideoSources";
-            tpMediaVideoSources.UseVisualStyleBackColor = true;
+            tpPreview.Controls.Add(scPreview);
+            tpPreview.Location = new Point(8, 45);
+            tpPreview.Name = "tpPreview";
+            tpPreview.Padding = new Padding(3);
+            tpPreview.Size = new Size(1452, 891);
+            tpPreview.TabIndex = 3;
+            tpPreview.Text = "Preview";
+            tpPreview.UseVisualStyleBackColor = true;
+            tpPreview.Enter += tpPreview_Enter;
             // 
-            // odcMediaVideoSources
+            // scPreview
             // 
-            odcMediaVideoSources.Dock = DockStyle.Fill;
-            odcMediaVideoSources.FirstValueAsyncFunc = null;
-            odcMediaVideoSources.Location = new Point(3, 3);
-            odcMediaVideoSources.Margin = new Padding(5);
-            odcMediaVideoSources.Name = "odcMediaVideoSources";
-            odcMediaVideoSources.RefreshAsyncFunc = null;
-            odcMediaVideoSources.Size = new Size(1430, 832);
-            odcMediaVideoSources.TabIndex = 1;
+            scPreview.Dock = DockStyle.Fill;
+            scPreview.Location = new Point(3, 3);
+            scPreview.Name = "scPreview";
+            // 
+            // scPreview.Panel1
+            // 
+            scPreview.Panel1.Controls.Add(gbPreviewProfile);
+            scPreview.Size = new Size(1446, 885);
+            scPreview.SplitterDistance = 482;
+            scPreview.TabIndex = 0;
+            // 
+            // gbPreviewProfile
+            // 
+            gbPreviewProfile.Controls.Add(pnlProfileInfo);
+            gbPreviewProfile.Controls.Add(cbProfiles);
+            gbPreviewProfile.Dock = DockStyle.Fill;
+            gbPreviewProfile.Location = new Point(0, 0);
+            gbPreviewProfile.Name = "gbPreviewProfile";
+            gbPreviewProfile.Size = new Size(482, 885);
+            gbPreviewProfile.TabIndex = 0;
+            gbPreviewProfile.TabStop = false;
+            gbPreviewProfile.Text = "Profile";
+            // 
+            // pnlProfileInfo
+            // 
+            pnlProfileInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pnlProfileInfo.Controls.Add(btnPreviewLive);
+            pnlProfileInfo.Controls.Add(txtPreviewProfileInfo);
+            pnlProfileInfo.Controls.Add(btnPreviewSnapshot);
+            pnlProfileInfo.Location = new Point(6, 82);
+            pnlProfileInfo.Name = "pnlProfileInfo";
+            pnlProfileInfo.Size = new Size(470, 800);
+            pnlProfileInfo.TabIndex = 0;
+            pnlProfileInfo.Visible = false;
+            // 
+            // btnPreviewLive
+            // 
+            btnPreviewLive.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnPreviewLive.Location = new Point(159, 751);
+            btnPreviewLive.Name = "btnPreviewLive";
+            btnPreviewLive.Size = new Size(150, 46);
+            btnPreviewLive.TabIndex = 4;
+            btnPreviewLive.Text = "Live";
+            btnPreviewLive.UseVisualStyleBackColor = true;
+            btnPreviewLive.Click += btnPreviewLive_Click;
+            // 
+            // txtPreviewProfileInfo
+            // 
+            txtPreviewProfileInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtPreviewProfileInfo.Location = new Point(3, 3);
+            txtPreviewProfileInfo.Multiline = true;
+            txtPreviewProfileInfo.Name = "txtPreviewProfileInfo";
+            txtPreviewProfileInfo.ReadOnly = true;
+            txtPreviewProfileInfo.ScrollBars = ScrollBars.Vertical;
+            txtPreviewProfileInfo.Size = new Size(464, 742);
+            txtPreviewProfileInfo.TabIndex = 2;
+            // 
+            // btnPreviewSnapshot
+            // 
+            btnPreviewSnapshot.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnPreviewSnapshot.Location = new Point(3, 751);
+            btnPreviewSnapshot.Name = "btnPreviewSnapshot";
+            btnPreviewSnapshot.Size = new Size(150, 46);
+            btnPreviewSnapshot.TabIndex = 3;
+            btnPreviewSnapshot.Text = "Snapshot";
+            btnPreviewSnapshot.UseVisualStyleBackColor = true;
+            btnPreviewSnapshot.Click += btnPreviewSnapshot_Click;
+            // 
+            // cbProfiles
+            // 
+            cbProfiles.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            cbProfiles.DisplayMember = "Name";
+            cbProfiles.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbProfiles.FormattingEnabled = true;
+            cbProfiles.Location = new Point(6, 37);
+            cbProfiles.Name = "cbProfiles";
+            cbProfiles.Size = new Size(470, 39);
+            cbProfiles.TabIndex = 1;
+            cbProfiles.SelectedValueChanged += cbProfiles_SelectedValueChanged;
             // 
             // MainForm
             // 
@@ -351,8 +486,16 @@
             tpNetworkDNS.ResumeLayout(false);
             tpMedia.ResumeLayout(false);
             tabControl3.ResumeLayout(false);
-            tpMediaProfiles.ResumeLayout(false);
+            tpMediaVideoSourceConfigurations.ResumeLayout(false);
             tpMediaVideoSources.ResumeLayout(false);
+            tpMediaProfiles.ResumeLayout(false);
+            tpPreview.ResumeLayout(false);
+            scPreview.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)scPreview).EndInit();
+            scPreview.ResumeLayout(false);
+            gbPreviewProfile.ResumeLayout(false);
+            pnlProfileInfo.ResumeLayout(false);
+            pnlProfileInfo.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -381,5 +524,15 @@
         private Controls.ObjectDisplayControl odcMediaProfiles;
         private TabPage tpMediaVideoSources;
         private Controls.ObjectDisplayControl odcMediaVideoSources;
+        private TabPage tpMediaVideoSourceConfigurations;
+        private Controls.ObjectDisplayControl odcMediaVideoSourceConfigurations;
+        private TabPage tpPreview;
+        private SplitContainer scPreview;
+        private GroupBox gbPreviewProfile;
+        private ComboBox cbProfiles;
+        private TextBox txtPreviewProfileInfo;
+        private Button btnPreviewLive;
+        private Button btnPreviewSnapshot;
+        private Panel pnlProfileInfo;
     }
 }
