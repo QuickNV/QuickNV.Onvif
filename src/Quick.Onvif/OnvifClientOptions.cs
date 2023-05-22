@@ -9,7 +9,9 @@ namespace Quick.Onvif
 {
     public class OnvifClientOptions
     {
-        public string DeviceServiceAddress { get; set; }
+        public string Scheme { get; set; } = "http";
+        public string Host { get; set; }
+        public int Port { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public HttpClientCredentialType ClientCredentialType { get; set; } = HttpClientCredentialType.Digest;

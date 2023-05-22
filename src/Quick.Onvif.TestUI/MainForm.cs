@@ -12,7 +12,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Quick.Onvif.TestUI
 {
@@ -79,61 +78,90 @@ namespace Quick.Onvif.TestUI
 
         private async void btnPreviewSnapshot_Click(object sender, EventArgs e)
         {
-            scPreview.Panel2.Controls.Clear();
-            scPreview.Enabled = false;
-            var rep = await mediaClient.GetSnapshotUriAsync(currentProfile.token);
-            var snapshotUri = rep.Uri;
-            snapshotUri = client.CorrectUri(snapshotUri);
-
-            HttpClientHandler httpClientHandler = new HttpClientHandler();
-            httpClientHandler.UseDefaultCredentials = true;
-            httpClientHandler.Credentials = new NetworkCredential(client.Options.UserName, client.Options.Password);
-            using (var httpClient = new HttpClient(httpClientHandler))
+            try
             {
-                using (var snapshotStream = await httpClient.GetStreamAsync(snapshotUri))
+                scPreview.Panel2.Controls.Clear();
+                scPreview.Enabled = false;
+                var rep = await mediaClient.GetSnapshotUriAsync(currentProfile.token);
+                var snapshotUri = rep.Uri;
+                snapshotUri = client.CorrectUri(snapshotUri);
+
+                HttpClientHandler httpClientHandler = new HttpClientHandler();
+                httpClientHandler.UseDefaultCredentials = true;
+                httpClientHandler.Credentials = new NetworkCredential(client.Options.UserName, client.Options.Password);
+                using (var httpClient = new HttpClient(httpClientHandler))
                 {
-                    var image = Image.FromStream(snapshotStream);
-                    PictureBox pictureBox = new PictureBox();
-                    pictureBox.Image = image;
-                    pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-                    scPreview.Panel2.Controls.Add(pictureBox);
-                    pictureBox.Dock = DockStyle.Fill;
+                    using (var snapshotStream = await httpClient.GetStreamAsync(snapshotUri))
+                    {
+                        var image = Image.FromStream(snapshotStream);
+                        PictureBox pictureBox = new PictureBox();
+                        pictureBox.Image = image;
+                        pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                        scPreview.Panel2.Controls.Add(pictureBox);
+                        pictureBox.Dock = DockStyle.Fill;
+                    }
                 }
             }
-            scPreview.Enabled = true;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                scPreview.Enabled = true;
+            }
         }
 
         private async void btnPreviewLive_Click(object sender, EventArgs e)
         {
-            scPreview.Panel2.Controls.Clear();
-            scPreview.Enabled = false;
+            try
+            {
+                scPreview.Panel2.Controls.Clear();
+                scPreview.Enabled = false;
 
-            var rep = await mediaClient.GetStreamUriAsync(new Media.StreamSetup()
-            {
-                Stream = Media.StreamType.RTPUnicast,
-                Transport = new Media.Transport()
+                var rep = await mediaClient.GetStreamUriAsync(new Media.StreamSetup()
                 {
-                    Protocol = Media.TransportProtocol.RTSP
-                }
-            }, currentProfile.token);
-            var streamUri = rep.Uri;
-            streamUri = client.CorrectUri(streamUri);           
-            var uriBuilder = new UriBuilder(streamUri);
-            uriBuilder.UserName=client.Options.UserName;
-            uriBuilder.Password = client.Options.Password;
-            if(client.Options.RtspPort >0)
-                uriBuilder.Port = client.Options.RtspPort;
-            streamUri = uriBuilder.Uri.ToString();
-            
-            var videoView = new VideoView()
+                    Stream = Media.StreamType.RTPUnicast,
+                    Transport = new Media.Transport()
+                    {
+                        Protocol = Media.TransportProtocol.RTSP
+                    }
+                }, currentProfile.token);
+                var streamUri = rep.Uri;
+                streamUri = client.CorrectUri(streamUri);
+                var uriBuilder = new UriBuilder(streamUri);
+                uriBuilder.UserName = client.Options.UserName;
+                uriBuilder.Password = client.Options.Password;
+                if (client.Options.RtspPort > 0)
+                    uriBuilder.Port = client.Options.RtspPort;
+                streamUri = uriBuilder.Uri.ToString();
+
+                var videoView = new VideoView()
+                {
+                    Dock = DockStyle.Fill,
+                    MediaPlayer = new MediaPlayer(libVLC)
+                };
+                videoView.MediaPlayer.Media = new LibVLCSharp.Shared.Media(libVLC, streamUri, FromType.FromLocation);
+                scPreview.Panel2.Controls.Add(videoView);
+                videoView.MediaPlayer.Play();
+                videoView.MediaPlayer.EncounteredError += MediaPlayer_EncounteredError;
+            }
+            catch (Exception ex)
             {
-                Dock = DockStyle.Fill,
-                MediaPlayer = new MediaPlayer(libVLC)
-            };
-            videoView.MediaPlayer.Media = new LibVLCSharp.Shared.Media(libVLC, streamUri, FromType.FromLocation);
-            scPreview.Panel2.Controls.Add(videoView);
-            videoView.MediaPlayer.Play();
-            scPreview.Enabled = true;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                scPreview.Enabled = true;
+            }
+        }
+
+        private void MediaPlayer_EncounteredError(object sender, EventArgs e)
+        {
+            Invoke(() =>
+            {
+                MessageBox.Show("MediaPlayer_EncounteredError", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            });
         }
     }
 }

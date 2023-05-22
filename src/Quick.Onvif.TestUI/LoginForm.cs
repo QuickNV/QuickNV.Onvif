@@ -9,8 +9,10 @@ namespace Quick.Onvif.TestUI
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            cbScheme.SelectedIndex = 0;
 #if DEBUG
-            txtDeviceServiceAddress.Text = "http://127.0.0.1/onvif/device_service";
+            nudPort.Value = 80;
+            txtHost.Text = "127.0.0.1";
             txtUserName.Text = "admin";
             txtPassword.Text = "Bs123456";
 #endif
@@ -20,11 +22,12 @@ namespace Quick.Onvif.TestUI
         {
             try
             {
-                tcConnectInfo.Enabled = false;
-                btnLogin.Enabled = false;
+                this.Enabled = false;
                 var client = new OnvifClient(new OnvifClientOptions()
                 {
-                    DeviceServiceAddress = txtDeviceServiceAddress.Text,
+                    Scheme = cbScheme.SelectedItem.ToString(),
+                    Host = txtHost.Text,
+                    Port = Convert.ToInt32(nudPort.Value),
                     UserName = txtUserName.Text,
                     Password = txtPassword.Text,
                     RtspPort = Convert.ToInt32(nudRtspPort.Value)
@@ -40,8 +43,7 @@ namespace Quick.Onvif.TestUI
             }
             finally
             {
-                tcConnectInfo.Enabled = true;
-                btnLogin.Enabled = true;
+                this.Enabled = true;
             }
         }
     }

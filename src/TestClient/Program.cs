@@ -2,8 +2,9 @@
 
 var client = new Quick.Onvif.OnvifClient(new Quick.Onvif.OnvifClientOptions()
 {
-    // HTTPS Url Example: https://127.0.0.1/onvif/device_service
-    DeviceServiceAddress = "http://127.0.0.1/onvif/device_service",
+    // HTTPS Example: Scheme = "https"
+    Host = "127.0.0.1",
+    Port = 80,
     UserName = "admin",
     Password = "Bs123456"
 });

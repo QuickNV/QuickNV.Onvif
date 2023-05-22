@@ -26,24 +26,27 @@ namespace Quick.Onvif
         public string CorrectUri(string addr)
         {
             var uriBuilder = new UriBuilder(addr);
-            if (uriBuilder.Host != DeviceServiceAddressUri.Host)
-                uriBuilder.Host = DeviceServiceAddressUri.Host;
-            if (uriBuilder.Port != DeviceServiceAddressUri.Port)
-                uriBuilder.Port = DeviceServiceAddressUri.Port;
+            if (uriBuilder.Host != Options.Host)
+                uriBuilder.Host = Options.Host;
+            if (uriBuilder.Port != Options.Port)
+                uriBuilder.Port = Options.Port;
             return uriBuilder.Uri.ToString();
         }
 
         public async Task ConnectAsync()
         {
-            DeviceServiceAddressUri = new Uri(Options.DeviceServiceAddress);
-
             ClientFactory = ClientFactory.GetClientFactory(
-                DeviceServiceAddressUri.Scheme,
+                Options.Scheme,
                 Options.UserName,
                 Options.Password,
                 Options.ClientCredentialType);
-
-            DeviceClient = new Device.DeviceClient(ClientFactory, Options.DeviceServiceAddress);
+            UriBuilder deviceClientUriBuilder = new UriBuilder();
+            deviceClientUriBuilder.Scheme = Options.Scheme;
+            deviceClientUriBuilder.Host = Options.Host;
+            deviceClientUriBuilder.Port = Options.Port;
+            deviceClientUriBuilder.Path = "/onvif/device_service";
+            var deviceClientUri = deviceClientUriBuilder.Uri.ToString();
+            DeviceClient = new Device.DeviceClient(ClientFactory, deviceClientUri);
             //Get Device Information
             DeviceInformation = await DeviceClient.GetDeviceInformationAsync(new Device.GetDeviceInformationRequest());
             //Get Capabilities
