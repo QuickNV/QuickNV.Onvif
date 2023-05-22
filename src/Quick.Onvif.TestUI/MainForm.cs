@@ -83,7 +83,13 @@ namespace Quick.Onvif.TestUI
                 var rep = await mediaClient.GetSnapshotUriAsync(currentProfile.token);
                 var snapshotUri = rep.Uri;
                 snapshotUri = client.CorrectUri(snapshotUri);
-
+                //if override snapshot port 
+                if (client.Options.SnapshotPort > 0)
+                {
+                    var uriBuilder = new UriBuilder(snapshotUri);
+                    uriBuilder.Port = client.Options.SnapshotPort;
+                    snapshotUri = uriBuilder.Uri.ToString();
+                }
                 HttpClientHandler httpClientHandler = new HttpClientHandler();
                 httpClientHandler.UseDefaultCredentials = true;
                 httpClientHandler.Credentials = new NetworkCredential(client.Options.UserName, client.Options.Password);
