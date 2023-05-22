@@ -23,11 +23,14 @@ namespace Quick.Onvif
         {
             this.Options = options;
         }
-        private string handleXAddr(string addr)
+        public string CorrectUri(string addr)
         {
-            var uri = new Uri(addr);
-            var newUri = new Uri(DeviceServiceAddressUri, uri.PathAndQuery);
-            return newUri.ToString();
+            var uriBuilder = new UriBuilder(addr);
+            if (uriBuilder.Host != DeviceServiceAddressUri.Host)
+                uriBuilder.Host = DeviceServiceAddressUri.Host;
+            if (uriBuilder.Port != DeviceServiceAddressUri.Port)
+                uriBuilder.Port = DeviceServiceAddressUri.Port;
+            return uriBuilder.Uri.ToString();
         }
 
         public async Task ConnectAsync()
@@ -51,20 +54,20 @@ namespace Quick.Onvif
                 });
                 Capabilities = rep.Capabilities;
                 if (!string.IsNullOrEmpty(Capabilities.Analytics?.XAddr))
-                    Capabilities.Analytics.XAddr = handleXAddr(Capabilities.Analytics.XAddr);
+                    Capabilities.Analytics.XAddr = CorrectUri(Capabilities.Analytics.XAddr);
                 if (!string.IsNullOrEmpty(Capabilities.Device?.XAddr))
-                    Capabilities.Device.XAddr = handleXAddr(Capabilities.Device.XAddr);
+                    Capabilities.Device.XAddr = CorrectUri(Capabilities.Device.XAddr);
                 if (!string.IsNullOrEmpty(Capabilities.Events?.XAddr))
-                    Capabilities.Events.XAddr = handleXAddr(Capabilities.Events.XAddr);
+                    Capabilities.Events.XAddr = CorrectUri(Capabilities.Events.XAddr);
                 if (!string.IsNullOrEmpty(Capabilities.Imaging?.XAddr))
-                    Capabilities.Imaging.XAddr = handleXAddr(Capabilities.Imaging.XAddr);
+                    Capabilities.Imaging.XAddr = CorrectUri(Capabilities.Imaging.XAddr);
                 if (!string.IsNullOrEmpty(Capabilities.Media?.XAddr))
-                    Capabilities.Media.XAddr = handleXAddr(Capabilities.Media.XAddr);
+                    Capabilities.Media.XAddr = CorrectUri(Capabilities.Media.XAddr);
                 if (!string.IsNullOrEmpty(Capabilities.PTZ?.XAddr))
-                    Capabilities.PTZ.XAddr = handleXAddr(Capabilities.PTZ.XAddr);
+                    Capabilities.PTZ.XAddr = CorrectUri(Capabilities.PTZ.XAddr);
 
                 if (!string.IsNullOrEmpty(Capabilities.Extension?.AnalyticsDevice?.XAddr))
-                    Capabilities.Extension.AnalyticsDevice.XAddr = handleXAddr(Capabilities.Extension.AnalyticsDevice.XAddr);
+                    Capabilities.Extension.AnalyticsDevice.XAddr = CorrectUri(Capabilities.Extension.AnalyticsDevice.XAddr);
                 foreach (var element in Capabilities.Extension.Any)
                 {
                     foreach (var child in element.ChildNodes)
@@ -75,7 +78,7 @@ namespace Quick.Onvif
                         if (elXAddr.LocalName != "XAddr")
                             continue;
                         if (!string.IsNullOrEmpty(elXAddr.InnerText))
-                            elXAddr.InnerText = handleXAddr(elXAddr.InnerText);
+                            elXAddr.InnerText = CorrectUri(elXAddr.InnerText);
                     }
                 }
             }
