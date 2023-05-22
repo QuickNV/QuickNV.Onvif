@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             btnLogin = new Button();
             nudRtspPort = new NumericUpDown();
-            label4 = new Label();
             label6 = new Label();
             nudPort = new NumericUpDown();
             cbScheme = new ComboBox();
@@ -42,6 +41,7 @@
             label3 = new Label();
             label2 = new Label();
             txtUserName = new TextBox();
+            cbOverrideRtspPort = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)nudRtspPort).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudPort).BeginInit();
             SuspendLayout();
@@ -60,23 +60,15 @@
             // nudRtspPort
             // 
             nudRtspPort.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            nudRtspPort.Location = new Point(13, 435);
+            nudRtspPort.Location = new Point(320, 404);
             nudRtspPort.Margin = new Padding(4);
             nudRtspPort.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudRtspPort.Minimum = new decimal(new int[] { 1, 0, 0, int.MinValue });
             nudRtspPort.Name = "nudRtspPort";
-            nudRtspPort.Size = new Size(496, 38);
+            nudRtspPort.Size = new Size(189, 38);
             nudRtspPort.TabIndex = 6;
-            nudRtspPort.Value = new decimal(new int[] { 554, 0, 0, 0 });
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(13, 400);
-            label4.Margin = new Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(128, 31);
-            label4.TabIndex = 22;
-            label4.Text = "RTSP Port";
+            nudRtspPort.Value = new decimal(new int[] { 1, 0, 0, int.MinValue });
+            nudRtspPort.Visible = false;
             // 
             // label6
             // 
@@ -177,14 +169,25 @@
             txtUserName.Size = new Size(496, 38);
             txtUserName.TabIndex = 4;
             // 
+            // cbOverrideRtspPort
+            // 
+            cbOverrideRtspPort.AutoSize = true;
+            cbOverrideRtspPort.Location = new Point(13, 405);
+            cbOverrideRtspPort.Name = "cbOverrideRtspPort";
+            cbOverrideRtspPort.Size = new Size(267, 35);
+            cbOverrideRtspPort.TabIndex = 101;
+            cbOverrideRtspPort.Text = "Override RTSP Port";
+            cbOverrideRtspPort.UseVisualStyleBackColor = true;
+            cbOverrideRtspPort.CheckedChanged += cbOverrideRtspPort_CheckedChanged;
+            // 
             // LoginForm
             // 
             AcceptButton = btnLogin;
             AutoScaleDimensions = new SizeF(14F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(520, 556);
+            Controls.Add(cbOverrideRtspPort);
             Controls.Add(nudRtspPort);
-            Controls.Add(label4);
             Controls.Add(label6);
             Controls.Add(nudPort);
             Controls.Add(cbScheme);
@@ -214,7 +217,6 @@
         #endregion
         private Button btnLogin;
         private NumericUpDown nudRtspPort;
-        private Label label4;
         private Label label6;
         private NumericUpDown nudPort;
         private ComboBox cbScheme;
@@ -225,5 +227,6 @@
         private Label label3;
         private Label label2;
         private TextBox txtUserName;
+        private CheckBox cbOverrideRtspPort;
     }
 }

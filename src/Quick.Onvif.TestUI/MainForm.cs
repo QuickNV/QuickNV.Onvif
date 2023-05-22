@@ -1,7 +1,5 @@
 ﻿using LibVLCSharp.Shared;
 using LibVLCSharp.WinForms;
-using Newtonsoft.Json;
-using Quick.Onvif.PTZ;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -104,6 +102,7 @@ namespace Quick.Onvif.TestUI
             }
             catch (Exception ex)
             {
+                scPreview.Panel2.Controls.Clear();
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             finally
@@ -148,6 +147,7 @@ namespace Quick.Onvif.TestUI
             }
             catch (Exception ex)
             {
+                scPreview.Panel2.Controls.Clear();
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             finally

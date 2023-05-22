@@ -46,5 +46,12 @@ namespace Quick.Onvif.TestUI
                 this.Enabled = true;
             }
         }
+
+        private void cbOverrideRtspPort_CheckedChanged(object sender, EventArgs e)
+        {
+            nudRtspPort.Visible = cbOverrideRtspPort.Checked;
+            if (!cbOverrideRtspPort.Checked)
+                nudRtspPort.Value = -1;
+        }
     }
 }
