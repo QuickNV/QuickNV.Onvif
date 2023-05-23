@@ -57,6 +57,10 @@
             tpPreview = new TabPage();
             scPreview = new SplitContainer();
             gbPreviewPTZ = new GroupBox();
+            btnPtzFocusNear = new Button();
+            btnPtzFocusFar = new Button();
+            btnPtzZoomOut = new Button();
+            btnPtzZoomIn = new Button();
             btnPtzRight = new Button();
             btnPtzLeft = new Button();
             btnPtzUp = new Button();
@@ -66,8 +70,6 @@
             cbProfiles = new ComboBox();
             btnPreviewSnapshot = new Button();
             txtPreviewProfileInfo = new TextBox();
-            btnPtzZoomIn = new Button();
-            btnPtzZoomOut = new Button();
             tcMain.SuspendLayout();
             tpDevice.SuspendLayout();
             tabControl2.SuspendLayout();
@@ -403,18 +405,68 @@
             // gbPreviewPTZ
             // 
             gbPreviewPTZ.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gbPreviewPTZ.Controls.Add(btnPtzFocusNear);
+            gbPreviewPTZ.Controls.Add(btnPtzFocusFar);
             gbPreviewPTZ.Controls.Add(btnPtzZoomOut);
             gbPreviewPTZ.Controls.Add(btnPtzZoomIn);
             gbPreviewPTZ.Controls.Add(btnPtzRight);
             gbPreviewPTZ.Controls.Add(btnPtzLeft);
             gbPreviewPTZ.Controls.Add(btnPtzUp);
             gbPreviewPTZ.Controls.Add(btnPtzDown);
-            gbPreviewPTZ.Location = new Point(0, 465);
+            gbPreviewPTZ.Location = new Point(0, 422);
             gbPreviewPTZ.Name = "gbPreviewPTZ";
-            gbPreviewPTZ.Size = new Size(482, 417);
+            gbPreviewPTZ.Size = new Size(482, 460);
             gbPreviewPTZ.TabIndex = 1;
             gbPreviewPTZ.TabStop = false;
             gbPreviewPTZ.Text = "PTZ";
+            // 
+            // btnPtzFocusNear
+            // 
+            btnPtzFocusNear.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnPtzFocusNear.Location = new Point(6, 401);
+            btnPtzFocusNear.Name = "btnPtzFocusNear";
+            btnPtzFocusNear.Size = new Size(470, 46);
+            btnPtzFocusNear.TabIndex = 9;
+            btnPtzFocusNear.Text = "Focus Near";
+            btnPtzFocusNear.UseVisualStyleBackColor = true;
+            btnPtzFocusNear.MouseDown += btnPtzFocusNear_MouseDown;
+            btnPtzFocusNear.MouseUp += btnPtzFocus_MouseUp;
+            // 
+            // btnPtzFocusFar
+            // 
+            btnPtzFocusFar.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnPtzFocusFar.Location = new Point(6, 349);
+            btnPtzFocusFar.Name = "btnPtzFocusFar";
+            btnPtzFocusFar.Size = new Size(470, 46);
+            btnPtzFocusFar.TabIndex = 8;
+            btnPtzFocusFar.Text = "Focus Far";
+            btnPtzFocusFar.UseVisualStyleBackColor = true;
+            btnPtzFocusFar.MouseDown += btnPtzFocusFar_MouseDown;
+            btnPtzFocusFar.MouseUp += btnPtzFocus_MouseUp;
+            // 
+            // btnPtzZoomOut
+            // 
+            btnPtzZoomOut.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnPtzZoomOut.Location = new Point(6, 297);
+            btnPtzZoomOut.Name = "btnPtzZoomOut";
+            btnPtzZoomOut.Size = new Size(470, 46);
+            btnPtzZoomOut.TabIndex = 7;
+            btnPtzZoomOut.Text = "Zoom Out";
+            btnPtzZoomOut.UseVisualStyleBackColor = true;
+            btnPtzZoomOut.MouseDown += btnPtzZoomOut_MouseDown;
+            btnPtzZoomOut.MouseUp += btnPtzAny_MouseUp;
+            // 
+            // btnPtzZoomIn
+            // 
+            btnPtzZoomIn.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnPtzZoomIn.Location = new Point(6, 245);
+            btnPtzZoomIn.Name = "btnPtzZoomIn";
+            btnPtzZoomIn.Size = new Size(470, 46);
+            btnPtzZoomIn.TabIndex = 6;
+            btnPtzZoomIn.Text = "Zoom In";
+            btnPtzZoomIn.UseVisualStyleBackColor = true;
+            btnPtzZoomIn.MouseDown += btnPtzZoomIn_MouseDown;
+            btnPtzZoomIn.MouseUp += btnPtzAny_MouseUp;
             // 
             // btnPtzRight
             // 
@@ -473,7 +525,7 @@
             gbPreviewProfile.Controls.Add(txtPreviewProfileInfo);
             gbPreviewProfile.Location = new Point(0, 0);
             gbPreviewProfile.Name = "gbPreviewProfile";
-            gbPreviewProfile.Size = new Size(482, 459);
+            gbPreviewProfile.Size = new Size(482, 416);
             gbPreviewProfile.TabIndex = 0;
             gbPreviewProfile.TabStop = false;
             gbPreviewProfile.Text = "Profile";
@@ -481,7 +533,7 @@
             // btnPreviewLive
             // 
             btnPreviewLive.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnPreviewLive.Location = new Point(162, 407);
+            btnPreviewLive.Location = new Point(162, 364);
             btnPreviewLive.Name = "btnPreviewLive";
             btnPreviewLive.Size = new Size(150, 46);
             btnPreviewLive.TabIndex = 4;
@@ -504,7 +556,7 @@
             // btnPreviewSnapshot
             // 
             btnPreviewSnapshot.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnPreviewSnapshot.Location = new Point(6, 407);
+            btnPreviewSnapshot.Location = new Point(6, 364);
             btnPreviewSnapshot.Name = "btnPreviewSnapshot";
             btnPreviewSnapshot.Size = new Size(150, 46);
             btnPreviewSnapshot.TabIndex = 3;
@@ -520,32 +572,8 @@
             txtPreviewProfileInfo.Name = "txtPreviewProfileInfo";
             txtPreviewProfileInfo.ReadOnly = true;
             txtPreviewProfileInfo.ScrollBars = ScrollBars.Vertical;
-            txtPreviewProfileInfo.Size = new Size(467, 319);
+            txtPreviewProfileInfo.Size = new Size(467, 276);
             txtPreviewProfileInfo.TabIndex = 2;
-            // 
-            // btnPtzZoomIn
-            // 
-            btnPtzZoomIn.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            btnPtzZoomIn.Location = new Point(6, 245);
-            btnPtzZoomIn.Name = "btnPtzZoomIn";
-            btnPtzZoomIn.Size = new Size(470, 46);
-            btnPtzZoomIn.TabIndex = 6;
-            btnPtzZoomIn.Text = "Zoom In";
-            btnPtzZoomIn.UseVisualStyleBackColor = true;
-            btnPtzZoomIn.MouseDown += btnPtzZoomIn_MouseDown;
-            btnPtzZoomIn.MouseUp += btnPtzAny_MouseUp;
-            // 
-            // btnPtzZoomOut
-            // 
-            btnPtzZoomOut.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            btnPtzZoomOut.Location = new Point(6, 297);
-            btnPtzZoomOut.Name = "btnPtzZoomOut";
-            btnPtzZoomOut.Size = new Size(470, 46);
-            btnPtzZoomOut.TabIndex = 7;
-            btnPtzZoomOut.Text = "Zoom Out";
-            btnPtzZoomOut.UseVisualStyleBackColor = true;
-            btnPtzZoomOut.MouseDown += btnPtzZoomOut_MouseDown;
-            btnPtzZoomOut.MouseUp += btnPtzAny_MouseUp;
             // 
             // MainForm
             // 
@@ -625,5 +653,7 @@
         private GroupBox gbPreviewPTZ;
         private Button btnPtzZoomOut;
         private Button btnPtzZoomIn;
+        private Button btnPtzFocusNear;
+        private Button btnPtzFocusFar;
     }
 }
