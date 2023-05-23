@@ -1,9 +1,11 @@
 ﻿using LibVLCSharp.Shared;
 using LibVLCSharp.WinForms;
+using Quick.Onvif.PTZ;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -71,7 +73,7 @@ namespace Quick.Onvif.TestUI
             sb.AppendLine($"        EncodingInterval: {currentProfile.VideoEncoderConfiguration.RateControl.EncodingInterval}");
             sb.AppendLine($"        BitrateLimit: {currentProfile.VideoEncoderConfiguration.RateControl.BitrateLimit}");
             txtPreviewProfileInfo.Text = sb.ToString();
-            pnlProfileInfo.Visible = true;
+            gbPreviewPTZ.Visible = currentProfile.PTZConfiguration != null;
         }
 
         private async void btnPreviewSnapshot_Click(object sender, EventArgs e)
@@ -168,6 +170,65 @@ namespace Quick.Onvif.TestUI
             {
                 MessageBox.Show("MediaPlayer_EncounteredError", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             });
+        }
+        private const float PTZ_MOVE_SPEED = 0.2f;
+        private async Task ptzContinuousMove(float x, float y, float zoom)
+        {
+            try
+            {
+                await ptzClient.ContinuousMoveAsync(currentProfile.token, new PTZ.PTZSpeed()
+                {
+                    PanTilt = new PTZ.Vector2D()
+                    {
+                        x = x,
+                        y = y
+                    },
+                    Zoom = new Vector1D()
+                    {
+                        x = zoom
+                    }
+                }, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnPtzAny_MouseUp(object sender, MouseEventArgs e)
+        {
+            _ = ptzContinuousMove(0, 0, 0);
+        }
+
+        private void btnPtzUp_MouseDown(object sender, MouseEventArgs e)
+        {
+            _ = ptzContinuousMove(0, PTZ_MOVE_SPEED, 0);
+        }
+
+
+        private void btnPtzDown_MouseDown(object sender, MouseEventArgs e)
+        {
+            _ = ptzContinuousMove(0, 0 - PTZ_MOVE_SPEED, 0);
+        }
+
+        private void btnPtzLeft_MouseDown(object sender, MouseEventArgs e)
+        {
+            _ = ptzContinuousMove(0 - PTZ_MOVE_SPEED, 0, 0);
+        }
+
+        private void btnPtzRight_MouseDown(object sender, MouseEventArgs e)
+        {
+            _ = ptzContinuousMove(PTZ_MOVE_SPEED, 0, 0);
+        }
+
+        private void btnPtzZoomIn_MouseDown(object sender, MouseEventArgs e)
+        {
+            _ = ptzContinuousMove(0, 0, PTZ_MOVE_SPEED);
+        }
+
+        private void btnPtzZoomOut_MouseDown(object sender, MouseEventArgs e)
+        {
+            _ = ptzContinuousMove(0, 0, 0 - PTZ_MOVE_SPEED);
         }
     }
 }

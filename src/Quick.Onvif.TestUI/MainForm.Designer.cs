@@ -56,12 +56,18 @@
             odcMediaProfiles = new Controls.ObjectDisplayControl();
             tpPreview = new TabPage();
             scPreview = new SplitContainer();
+            gbPreviewPTZ = new GroupBox();
+            btnPtzRight = new Button();
+            btnPtzLeft = new Button();
+            btnPtzUp = new Button();
+            btnPtzDown = new Button();
             gbPreviewProfile = new GroupBox();
-            pnlProfileInfo = new Panel();
             btnPreviewLive = new Button();
-            txtPreviewProfileInfo = new TextBox();
-            btnPreviewSnapshot = new Button();
             cbProfiles = new ComboBox();
+            btnPreviewSnapshot = new Button();
+            txtPreviewProfileInfo = new TextBox();
+            btnPtzZoomIn = new Button();
+            btnPtzZoomOut = new Button();
             tcMain.SuspendLayout();
             tpDevice.SuspendLayout();
             tabControl2.SuspendLayout();
@@ -82,8 +88,8 @@
             ((System.ComponentModel.ISupportInitialize)scPreview).BeginInit();
             scPreview.Panel1.SuspendLayout();
             scPreview.SuspendLayout();
+            gbPreviewPTZ.SuspendLayout();
             gbPreviewProfile.SuspendLayout();
-            pnlProfileInfo.SuspendLayout();
             SuspendLayout();
             // 
             // tcMain
@@ -388,67 +394,100 @@
             // 
             // scPreview.Panel1
             // 
+            scPreview.Panel1.Controls.Add(gbPreviewPTZ);
             scPreview.Panel1.Controls.Add(gbPreviewProfile);
             scPreview.Size = new Size(1446, 885);
             scPreview.SplitterDistance = 482;
             scPreview.TabIndex = 0;
             // 
+            // gbPreviewPTZ
+            // 
+            gbPreviewPTZ.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gbPreviewPTZ.Controls.Add(btnPtzZoomOut);
+            gbPreviewPTZ.Controls.Add(btnPtzZoomIn);
+            gbPreviewPTZ.Controls.Add(btnPtzRight);
+            gbPreviewPTZ.Controls.Add(btnPtzLeft);
+            gbPreviewPTZ.Controls.Add(btnPtzUp);
+            gbPreviewPTZ.Controls.Add(btnPtzDown);
+            gbPreviewPTZ.Location = new Point(0, 465);
+            gbPreviewPTZ.Name = "gbPreviewPTZ";
+            gbPreviewPTZ.Size = new Size(482, 417);
+            gbPreviewPTZ.TabIndex = 1;
+            gbPreviewPTZ.TabStop = false;
+            gbPreviewPTZ.Text = "PTZ";
+            // 
+            // btnPtzRight
+            // 
+            btnPtzRight.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnPtzRight.Location = new Point(6, 89);
+            btnPtzRight.Name = "btnPtzRight";
+            btnPtzRight.Size = new Size(470, 46);
+            btnPtzRight.TabIndex = 5;
+            btnPtzRight.Text = "Right";
+            btnPtzRight.UseVisualStyleBackColor = true;
+            btnPtzRight.MouseDown += btnPtzRight_MouseDown;
+            btnPtzRight.MouseUp += btnPtzAny_MouseUp;
+            // 
+            // btnPtzLeft
+            // 
+            btnPtzLeft.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnPtzLeft.Location = new Point(6, 37);
+            btnPtzLeft.Name = "btnPtzLeft";
+            btnPtzLeft.Size = new Size(470, 46);
+            btnPtzLeft.TabIndex = 5;
+            btnPtzLeft.Text = "Left";
+            btnPtzLeft.UseVisualStyleBackColor = true;
+            btnPtzLeft.MouseDown += btnPtzLeft_MouseDown;
+            btnPtzLeft.MouseUp += btnPtzAny_MouseUp;
+            // 
+            // btnPtzUp
+            // 
+            btnPtzUp.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnPtzUp.Location = new Point(6, 141);
+            btnPtzUp.Name = "btnPtzUp";
+            btnPtzUp.Size = new Size(470, 46);
+            btnPtzUp.TabIndex = 5;
+            btnPtzUp.Text = "Up";
+            btnPtzUp.UseVisualStyleBackColor = true;
+            btnPtzUp.MouseDown += btnPtzUp_MouseDown;
+            btnPtzUp.MouseUp += btnPtzAny_MouseUp;
+            // 
+            // btnPtzDown
+            // 
+            btnPtzDown.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnPtzDown.Location = new Point(6, 193);
+            btnPtzDown.Name = "btnPtzDown";
+            btnPtzDown.Size = new Size(470, 46);
+            btnPtzDown.TabIndex = 5;
+            btnPtzDown.Text = "Down";
+            btnPtzDown.UseVisualStyleBackColor = true;
+            btnPtzDown.MouseDown += btnPtzDown_MouseDown;
+            btnPtzDown.MouseUp += btnPtzAny_MouseUp;
+            // 
             // gbPreviewProfile
             // 
-            gbPreviewProfile.Controls.Add(pnlProfileInfo);
+            gbPreviewProfile.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gbPreviewProfile.Controls.Add(btnPreviewLive);
             gbPreviewProfile.Controls.Add(cbProfiles);
-            gbPreviewProfile.Dock = DockStyle.Fill;
+            gbPreviewProfile.Controls.Add(btnPreviewSnapshot);
+            gbPreviewProfile.Controls.Add(txtPreviewProfileInfo);
             gbPreviewProfile.Location = new Point(0, 0);
             gbPreviewProfile.Name = "gbPreviewProfile";
-            gbPreviewProfile.Size = new Size(482, 885);
+            gbPreviewProfile.Size = new Size(482, 459);
             gbPreviewProfile.TabIndex = 0;
             gbPreviewProfile.TabStop = false;
             gbPreviewProfile.Text = "Profile";
             // 
-            // pnlProfileInfo
-            // 
-            pnlProfileInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pnlProfileInfo.Controls.Add(btnPreviewLive);
-            pnlProfileInfo.Controls.Add(txtPreviewProfileInfo);
-            pnlProfileInfo.Controls.Add(btnPreviewSnapshot);
-            pnlProfileInfo.Location = new Point(6, 82);
-            pnlProfileInfo.Name = "pnlProfileInfo";
-            pnlProfileInfo.Size = new Size(470, 800);
-            pnlProfileInfo.TabIndex = 0;
-            pnlProfileInfo.Visible = false;
-            // 
             // btnPreviewLive
             // 
             btnPreviewLive.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnPreviewLive.Location = new Point(159, 751);
+            btnPreviewLive.Location = new Point(162, 407);
             btnPreviewLive.Name = "btnPreviewLive";
             btnPreviewLive.Size = new Size(150, 46);
             btnPreviewLive.TabIndex = 4;
             btnPreviewLive.Text = "Live";
             btnPreviewLive.UseVisualStyleBackColor = true;
             btnPreviewLive.Click += btnPreviewLive_Click;
-            // 
-            // txtPreviewProfileInfo
-            // 
-            txtPreviewProfileInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtPreviewProfileInfo.Location = new Point(3, 3);
-            txtPreviewProfileInfo.Multiline = true;
-            txtPreviewProfileInfo.Name = "txtPreviewProfileInfo";
-            txtPreviewProfileInfo.ReadOnly = true;
-            txtPreviewProfileInfo.ScrollBars = ScrollBars.Vertical;
-            txtPreviewProfileInfo.Size = new Size(464, 742);
-            txtPreviewProfileInfo.TabIndex = 2;
-            // 
-            // btnPreviewSnapshot
-            // 
-            btnPreviewSnapshot.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnPreviewSnapshot.Location = new Point(3, 751);
-            btnPreviewSnapshot.Name = "btnPreviewSnapshot";
-            btnPreviewSnapshot.Size = new Size(150, 46);
-            btnPreviewSnapshot.TabIndex = 3;
-            btnPreviewSnapshot.Text = "Snapshot";
-            btnPreviewSnapshot.UseVisualStyleBackColor = true;
-            btnPreviewSnapshot.Click += btnPreviewSnapshot_Click;
             // 
             // cbProfiles
             // 
@@ -461,6 +500,52 @@
             cbProfiles.Size = new Size(470, 39);
             cbProfiles.TabIndex = 1;
             cbProfiles.SelectedValueChanged += cbProfiles_SelectedValueChanged;
+            // 
+            // btnPreviewSnapshot
+            // 
+            btnPreviewSnapshot.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnPreviewSnapshot.Location = new Point(6, 407);
+            btnPreviewSnapshot.Name = "btnPreviewSnapshot";
+            btnPreviewSnapshot.Size = new Size(150, 46);
+            btnPreviewSnapshot.TabIndex = 3;
+            btnPreviewSnapshot.Text = "Snapshot";
+            btnPreviewSnapshot.UseVisualStyleBackColor = true;
+            btnPreviewSnapshot.Click += btnPreviewSnapshot_Click;
+            // 
+            // txtPreviewProfileInfo
+            // 
+            txtPreviewProfileInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtPreviewProfileInfo.Location = new Point(6, 82);
+            txtPreviewProfileInfo.Multiline = true;
+            txtPreviewProfileInfo.Name = "txtPreviewProfileInfo";
+            txtPreviewProfileInfo.ReadOnly = true;
+            txtPreviewProfileInfo.ScrollBars = ScrollBars.Vertical;
+            txtPreviewProfileInfo.Size = new Size(467, 319);
+            txtPreviewProfileInfo.TabIndex = 2;
+            // 
+            // btnPtzZoomIn
+            // 
+            btnPtzZoomIn.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnPtzZoomIn.Location = new Point(6, 245);
+            btnPtzZoomIn.Name = "btnPtzZoomIn";
+            btnPtzZoomIn.Size = new Size(470, 46);
+            btnPtzZoomIn.TabIndex = 6;
+            btnPtzZoomIn.Text = "Zoom In";
+            btnPtzZoomIn.UseVisualStyleBackColor = true;
+            btnPtzZoomIn.MouseDown += btnPtzZoomIn_MouseDown;
+            btnPtzZoomIn.MouseUp += btnPtzAny_MouseUp;
+            // 
+            // btnPtzZoomOut
+            // 
+            btnPtzZoomOut.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnPtzZoomOut.Location = new Point(6, 297);
+            btnPtzZoomOut.Name = "btnPtzZoomOut";
+            btnPtzZoomOut.Size = new Size(470, 46);
+            btnPtzZoomOut.TabIndex = 7;
+            btnPtzZoomOut.Text = "Zoom Out";
+            btnPtzZoomOut.UseVisualStyleBackColor = true;
+            btnPtzZoomOut.MouseDown += btnPtzZoomOut_MouseDown;
+            btnPtzZoomOut.MouseUp += btnPtzAny_MouseUp;
             // 
             // MainForm
             // 
@@ -493,9 +578,9 @@
             scPreview.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)scPreview).EndInit();
             scPreview.ResumeLayout(false);
+            gbPreviewPTZ.ResumeLayout(false);
             gbPreviewProfile.ResumeLayout(false);
-            pnlProfileInfo.ResumeLayout(false);
-            pnlProfileInfo.PerformLayout();
+            gbPreviewProfile.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -533,6 +618,12 @@
         private TextBox txtPreviewProfileInfo;
         private Button btnPreviewLive;
         private Button btnPreviewSnapshot;
-        private Panel pnlProfileInfo;
+        private Button btnPtzRight;
+        private Button btnPtzLeft;
+        private Button btnPtzDown;
+        private Button btnPtzUp;
+        private GroupBox gbPreviewPTZ;
+        private Button btnPtzZoomOut;
+        private Button btnPtzZoomIn;
     }
 }
