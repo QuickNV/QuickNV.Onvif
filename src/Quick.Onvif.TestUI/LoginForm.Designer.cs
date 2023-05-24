@@ -50,10 +50,10 @@
             // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(12, 382);
+            btnLogin.Location = new Point(13, 375);
             btnLogin.Margin = new Padding(4);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(276, 59);
+            btnLogin.Size = new Size(493, 59);
             btnLogin.TabIndex = 100;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
@@ -178,10 +178,10 @@
             cbOverrideSnapshotPort.Location = new Point(13, 330);
             cbOverrideSnapshotPort.Name = "cbOverrideSnapshotPort";
             cbOverrideSnapshotPort.Size = new Size(315, 35);
-            cbOverrideSnapshotPort.TabIndex = 101;
+            cbOverrideSnapshotPort.TabIndex = 9;
             cbOverrideSnapshotPort.Text = "Override Snapshot Port";
             cbOverrideSnapshotPort.UseVisualStyleBackColor = true;
-            cbOverrideSnapshotPort.CheckedChanged += checkBox1_CheckedChanged;
+            cbOverrideSnapshotPort.CheckedChanged += cbOverrideSnapshotPort_CheckedChanged;
             // 
             // nudSnapshotPort
             // 
@@ -192,7 +192,7 @@
             nudSnapshotPort.Minimum = new decimal(new int[] { 1, 0, 0, int.MinValue });
             nudSnapshotPort.Name = "nudSnapshotPort";
             nudSnapshotPort.Size = new Size(138, 38);
-            nudSnapshotPort.TabIndex = 102;
+            nudSnapshotPort.TabIndex = 10;
             nudSnapshotPort.Value = new decimal(new int[] { 1, 0, 0, int.MinValue });
             nudSnapshotPort.Visible = false;
             // 
@@ -201,7 +201,7 @@
             AcceptButton = btnLogin;
             AutoScaleDimensions = new SizeF(14F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(516, 454);
+            ClientSize = new Size(516, 449);
             Controls.Add(cbOverrideSnapshotPort);
             Controls.Add(nudSnapshotPort);
             Controls.Add(cbHttps);

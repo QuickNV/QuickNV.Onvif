@@ -55,7 +55,7 @@ namespace Quick.Onvif.TestUI
                 nudRtspPort.Value = -1;
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void cbOverrideSnapshotPort_CheckedChanged(object sender, EventArgs e)
         {
             nudSnapshotPort.Visible = cbOverrideSnapshotPort.Checked;
             if (!cbOverrideSnapshotPort.Checked)
