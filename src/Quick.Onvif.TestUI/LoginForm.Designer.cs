@@ -229,7 +229,7 @@
             pnlCredentialType.Location = new Point(13, 162);
             pnlCredentialType.Name = "pnlCredentialType";
             pnlCredentialType.Size = new Size(492, 159);
-            pnlCredentialType.TabIndex = 102;
+            pnlCredentialType.TabIndex = 5;
             // 
             // LoginForm
             // 
