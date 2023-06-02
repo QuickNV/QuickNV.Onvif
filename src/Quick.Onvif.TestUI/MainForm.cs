@@ -85,31 +85,16 @@ namespace Quick.Onvif.TestUI
             {
                 scPreview.Panel2.Controls.Clear();
                 scPreview.Enabled = false;
-                var rep = await mediaClient.GetSnapshotUriAsync(currentProfile.token);
-                var snapshotUri = rep.Uri;
-                snapshotUri = client.CorrectUri(snapshotUri);
-                //if override snapshot port 
-                if (client.Options.SnapshotPort > 0)
-                {
-                    var uriBuilder = new UriBuilder(snapshotUri);
-                    uriBuilder.Port = client.Options.SnapshotPort;
-                    snapshotUri = uriBuilder.Uri.ToString();
-                }
-                HttpClientHandler httpClientHandler = new HttpClientHandler();
-                httpClientHandler.UseDefaultCredentials = true;
-                httpClientHandler.Credentials = new NetworkCredential(client.Options.UserName, client.Options.Password);
-                using (var httpClient = new HttpClient(httpClientHandler))
-                {
-                    using (var snapshotStream = await httpClient.GetStreamAsync(snapshotUri))
-                    {
-                        var image = Image.FromStream(snapshotStream);
-                        PictureBox pictureBox = new PictureBox();
-                        pictureBox.Image = image;
-                        pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-                        scPreview.Panel2.Controls.Add(pictureBox);
-                        pictureBox.Dock = DockStyle.Fill;
-                    }
-                }
+                Image image = null;
+                await mediaClient.QuickOnvif_SnapshotAsync(
+                    currentProfile.token,
+                    snapshotStream => image = Image.FromStream(snapshotStream)
+                    );
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Image = image;
+                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                scPreview.Panel2.Controls.Add(pictureBox);
+                pictureBox.Dock = DockStyle.Fill;
             }
             catch (Exception ex)
             {
@@ -129,23 +114,7 @@ namespace Quick.Onvif.TestUI
                 scPreview.Panel2.Controls.Clear();
                 scPreview.Enabled = false;
 
-                var rep = await mediaClient.GetStreamUriAsync(new Media.StreamSetup()
-                {
-                    Stream = Media.StreamType.RTPUnicast,
-                    Transport = new Media.Transport()
-                    {
-                        Protocol = Media.TransportProtocol.RTSP
-                    }
-                }, currentProfile.token);
-                var streamUri = rep.Uri;
-                streamUri = client.CorrectUri(streamUri);
-                var uriBuilder = new UriBuilder(streamUri);
-                uriBuilder.UserName = client.Options.UserName;
-                uriBuilder.Password = client.Options.Password;
-                if (client.Options.RtspPort > 0)
-                    uriBuilder.Port = client.Options.RtspPort;
-                streamUri = uriBuilder.Uri.ToString();
-
+                var streamUri = await mediaClient.QuickOnvif_GetStreamUriAsync(currentProfile.token, true);
                 var videoView = new VideoView()
                 {
                     Dock = DockStyle.Fill,
