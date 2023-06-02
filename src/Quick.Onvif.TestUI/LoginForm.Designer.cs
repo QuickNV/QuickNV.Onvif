@@ -43,14 +43,18 @@
             cbHttps = new CheckBox();
             cbOverrideSnapshotPort = new CheckBox();
             nudSnapshotPort = new NumericUpDown();
+            label4 = new Label();
+            cbCredentialType = new ComboBox();
+            pnlCredentialType = new Panel();
             ((System.ComponentModel.ISupportInitialize)nudRtspPort).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudPort).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudSnapshotPort).BeginInit();
+            pnlCredentialType.SuspendLayout();
             SuspendLayout();
             // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(13, 375);
+            btnLogin.Location = new Point(13, 459);
             btnLogin.Margin = new Padding(4);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(493, 59);
@@ -62,14 +66,13 @@
             // nudRtspPort
             // 
             nudRtspPort.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            nudRtspPort.Location = new Point(367, 283);
+            nudRtspPort.Location = new Point(367, 367);
             nudRtspPort.Margin = new Padding(4);
             nudRtspPort.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
             nudRtspPort.Minimum = new decimal(new int[] { 1, 0, 0, int.MinValue });
             nudRtspPort.Name = "nudRtspPort";
             nudRtspPort.Size = new Size(138, 38);
-            nudRtspPort.TabIndex = 8;
-            nudRtspPort.Value = new decimal(new int[] { 1, 0, 0, int.MinValue });
+            nudRtspPort.TabIndex = 9;
             nudRtspPort.Visible = false;
             // 
             // label6
@@ -106,12 +109,12 @@
             // txtPassword
             // 
             txtPassword.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtPassword.Location = new Point(13, 198);
+            txtPassword.Location = new Point(2, 116);
             txtPassword.Margin = new Padding(4);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '●';
-            txtPassword.Size = new Size(491, 38);
-            txtPassword.TabIndex = 5;
+            txtPassword.Size = new Size(488, 38);
+            txtPassword.TabIndex = 6;
             // 
             // txtHost
             // 
@@ -125,7 +128,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(13, 163);
+            label3.Location = new Point(2, 81);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(122, 31);
@@ -135,7 +138,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(13, 86);
+            label2.Location = new Point(2, 4);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(135, 31);
@@ -145,19 +148,19 @@
             // txtUserName
             // 
             txtUserName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtUserName.Location = new Point(13, 121);
+            txtUserName.Location = new Point(2, 39);
             txtUserName.Margin = new Padding(4);
             txtUserName.Name = "txtUserName";
-            txtUserName.Size = new Size(492, 38);
-            txtUserName.TabIndex = 4;
+            txtUserName.Size = new Size(488, 38);
+            txtUserName.TabIndex = 5;
             // 
             // cbOverrideRtspPort
             // 
             cbOverrideRtspPort.AutoSize = true;
-            cbOverrideRtspPort.Location = new Point(13, 284);
+            cbOverrideRtspPort.Location = new Point(13, 368);
             cbOverrideRtspPort.Name = "cbOverrideRtspPort";
             cbOverrideRtspPort.Size = new Size(267, 35);
-            cbOverrideRtspPort.TabIndex = 7;
+            cbOverrideRtspPort.TabIndex = 8;
             cbOverrideRtspPort.Text = "Override RTSP Port";
             cbOverrideRtspPort.UseVisualStyleBackColor = true;
             cbOverrideRtspPort.CheckedChanged += cbOverrideRtspPort_CheckedChanged;
@@ -165,20 +168,20 @@
             // cbHttps
             // 
             cbHttps.AutoSize = true;
-            cbHttps.Location = new Point(12, 243);
+            cbHttps.Location = new Point(12, 327);
             cbHttps.Name = "cbHttps";
             cbHttps.Size = new Size(185, 35);
-            cbHttps.TabIndex = 6;
+            cbHttps.TabIndex = 7;
             cbHttps.Text = "TLS (HTTPS)";
             cbHttps.UseVisualStyleBackColor = true;
             // 
             // cbOverrideSnapshotPort
             // 
             cbOverrideSnapshotPort.AutoSize = true;
-            cbOverrideSnapshotPort.Location = new Point(13, 330);
+            cbOverrideSnapshotPort.Location = new Point(13, 414);
             cbOverrideSnapshotPort.Name = "cbOverrideSnapshotPort";
             cbOverrideSnapshotPort.Size = new Size(315, 35);
-            cbOverrideSnapshotPort.TabIndex = 9;
+            cbOverrideSnapshotPort.TabIndex = 10;
             cbOverrideSnapshotPort.Text = "Override Snapshot Port";
             cbOverrideSnapshotPort.UseVisualStyleBackColor = true;
             cbOverrideSnapshotPort.CheckedChanged += cbOverrideSnapshotPort_CheckedChanged;
@@ -186,22 +189,56 @@
             // nudSnapshotPort
             // 
             nudSnapshotPort.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            nudSnapshotPort.Location = new Point(367, 329);
+            nudSnapshotPort.Location = new Point(367, 413);
             nudSnapshotPort.Margin = new Padding(4);
             nudSnapshotPort.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
             nudSnapshotPort.Minimum = new decimal(new int[] { 1, 0, 0, int.MinValue });
             nudSnapshotPort.Name = "nudSnapshotPort";
             nudSnapshotPort.Size = new Size(138, 38);
-            nudSnapshotPort.TabIndex = 10;
-            nudSnapshotPort.Value = new decimal(new int[] { 1, 0, 0, int.MinValue });
+            nudSnapshotPort.TabIndex = 11;
             nudSnapshotPort.Visible = false;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(13, 86);
+            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(187, 31);
+            label4.TabIndex = 14;
+            label4.Text = "CredentialType";
+            // 
+            // cbCredentialType
+            // 
+            cbCredentialType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            cbCredentialType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbCredentialType.FormattingEnabled = true;
+            cbCredentialType.Items.AddRange(new object[] { "None", "Digest", "Basic" });
+            cbCredentialType.Location = new Point(13, 120);
+            cbCredentialType.Name = "cbCredentialType";
+            cbCredentialType.Size = new Size(492, 39);
+            cbCredentialType.TabIndex = 4;
+            cbCredentialType.SelectedIndexChanged += cbCredentialType_SelectedIndexChanged;
+            // 
+            // pnlCredentialType
+            // 
+            pnlCredentialType.Controls.Add(label2);
+            pnlCredentialType.Controls.Add(txtUserName);
+            pnlCredentialType.Controls.Add(label3);
+            pnlCredentialType.Controls.Add(txtPassword);
+            pnlCredentialType.Location = new Point(13, 162);
+            pnlCredentialType.Name = "pnlCredentialType";
+            pnlCredentialType.Size = new Size(492, 159);
+            pnlCredentialType.TabIndex = 102;
             // 
             // LoginForm
             // 
             AcceptButton = btnLogin;
             AutoScaleDimensions = new SizeF(14F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(516, 449);
+            ClientSize = new Size(516, 536);
+            Controls.Add(pnlCredentialType);
+            Controls.Add(cbCredentialType);
             Controls.Add(cbOverrideSnapshotPort);
             Controls.Add(nudSnapshotPort);
             Controls.Add(cbHttps);
@@ -210,11 +247,8 @@
             Controls.Add(label6);
             Controls.Add(nudPort);
             Controls.Add(label1);
-            Controls.Add(txtPassword);
             Controls.Add(txtHost);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(txtUserName);
+            Controls.Add(label4);
             Controls.Add(btnLogin);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -228,6 +262,8 @@
             ((System.ComponentModel.ISupportInitialize)nudRtspPort).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudPort).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudSnapshotPort).EndInit();
+            pnlCredentialType.ResumeLayout(false);
+            pnlCredentialType.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -247,5 +283,8 @@
         private CheckBox cbHttps;
         private CheckBox cbOverrideSnapshotPort;
         private NumericUpDown nudSnapshotPort;
+        private Label label4;
+        private ComboBox cbCredentialType;
+        private Panel pnlCredentialType;
     }
 }

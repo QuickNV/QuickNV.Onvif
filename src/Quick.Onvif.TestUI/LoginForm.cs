@@ -1,3 +1,6 @@
+using System.ServiceModel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+
 namespace Quick.Onvif.TestUI
 {
     public partial class LoginForm : Form
@@ -15,6 +18,7 @@ namespace Quick.Onvif.TestUI
             txtUserName.Text = "admin";
             txtPassword.Text = "Bs123456";
 #endif
+            cbCredentialType.SelectedIndex = 1;
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
@@ -23,16 +27,21 @@ namespace Quick.Onvif.TestUI
             try
             {
                 this.Enabled = false;
-                var client = new OnvifClient(new OnvifClientOptions()
+                var clientOptions = new OnvifClientOptions()
                 {
                     Scheme = scheme,
                     Host = txtHost.Text,
                     Port = Convert.ToInt32(nudPort.Value),
-                    UserName = txtUserName.Text,
-                    Password = txtPassword.Text,
+                    ClientCredentialType = Enum.Parse<HttpClientCredentialType>(cbCredentialType.SelectedItem.ToString()),
                     RtspPort = Convert.ToInt32(nudRtspPort.Value),
                     SnapshotPort = Convert.ToInt32(nudSnapshotPort.Value)
-                });
+                };
+                if (clientOptions.ClientCredentialType != HttpClientCredentialType.None)
+                {
+                    clientOptions.UserName = txtUserName.Text;
+                    clientOptions.Password = txtPassword.Text;
+                }
+                var client = new OnvifClient(clientOptions);
                 await client.ConnectAsync();
                 this.Hide();
                 new MainForm(client).ShowDialog();
@@ -60,6 +69,11 @@ namespace Quick.Onvif.TestUI
             nudSnapshotPort.Visible = cbOverrideSnapshotPort.Checked;
             if (!cbOverrideSnapshotPort.Checked)
                 nudSnapshotPort.Value = -1;
+        }
+
+        private void cbCredentialType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pnlCredentialType.Visible = cbCredentialType.SelectedIndex > 0;
         }
     }
 }

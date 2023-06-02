@@ -6,7 +6,7 @@ namespace Quick.Onvif.Factorys
     {
         private HttpClientCredentialType clientCredentialType;
 
-        public HttpClientFactory(string userName,string password,HttpClientCredentialType clientCredentialType)
+        public HttpClientFactory(string userName, string password, HttpClientCredentialType clientCredentialType)
         {
             var binding = new NetHttpBinding();
             binding.MessageEncoding = NetHttpMessageEncoding.Text;
@@ -21,6 +21,8 @@ namespace Quick.Onvif.Factorys
         {
             switch (clientCredentialType)
             {
+                case HttpClientCredentialType.None:
+                    break;
                 case HttpClientCredentialType.Digest:
                     client.ClientCredentials.HttpDigest.ClientCredential.UserName = UserName;
                     client.ClientCredentials.HttpDigest.ClientCredential.Password = Password;
@@ -30,7 +32,7 @@ namespace Quick.Onvif.Factorys
                     client.ClientCredentials.UserName.Password = Password;
                     break;
                 default:
-                    throw new NotSupportedException("Parameter 'clientCredentialType' only support Digest and Basic.");
+                    throw new NotSupportedException("Parameter 'clientCredentialType' only support None、Digest and Basic.");
             }
         }
     }
