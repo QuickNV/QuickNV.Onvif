@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Common\Discovery\Schemas\addressing.xsd" />
+    <None Remove="Common\Discovery\Schemas\soap-envelope.xsd" />
+    <None Remove="Common\Discovery\Schemas\ws-discovery.xsd" />
+    <None Remove="Common\Discovery\Schemas\xml.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Common\Discovery\Schemas\addressing.xsd" />
+    <EmbeddedResource Include="Common\Discovery\Schemas\soap-envelope.xsd" />
+    <EmbeddedResource Include="Common\Discovery\Schemas\ws-discovery.xsd" />
+    <EmbeddedResource Include="Common\Discovery\Schemas\xml.xsd" />
+  </ItemGroup>
+
+</Project>

@@ -51,7 +51,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Uplink", "Quick
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif", "Quick.Onvif\Quick.Onvif.csproj", "{5E193505-FA33-43E8-8C55-26A12557206D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Onvif.TestUI", "Quick.Onvif.TestUI\Quick.Onvif.TestUI.csproj", "{0BD325A1-F32A-4F47-975C-9B8E0F8EF066}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.TestUI", "Quick.Onvif.TestUI\Quick.Onvif.TestUI.csproj", "{0BD325A1-F32A-4F47-975C-9B8E0F8EF066}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Onvif.Discovery", "Quick.Onvif.Discovery\Quick.Onvif.Discovery.csproj", "{CB27BBC6-A790-4AF0-912C-5A7A78BD6462}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -159,6 +161,10 @@ Global
 		{0BD325A1-F32A-4F47-975C-9B8E0F8EF066}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BD325A1-F32A-4F47-975C-9B8E0F8EF066}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BD325A1-F32A-4F47-975C-9B8E0F8EF066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB27BBC6-A790-4AF0-912C-5A7A78BD6462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB27BBC6-A790-4AF0-912C-5A7A78BD6462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB27BBC6-A790-4AF0-912C-5A7A78BD6462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB27BBC6-A790-4AF0-912C-5A7A78BD6462}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
