@@ -1,9 +1,8 @@
 # Quick.Onvif.Discovery [![NuGet Version](http://img.shields.io/nuget/v/Quick.Onvif.Discovery.svg?style=flat)](https://www.nuget.org/packages/Quick.Onvif.Discovery/)
 
 * [Quick.Onvif.Discovery] can discovery Onvif devices in local network.
-* [Quick.Onvif.Discovery]能在局域网内发现Onvif设备
 
-## How to Use - 使用方法
+## How to Use
 ```csharp
 using Newtonsoft.Json;
 using Quick.Onvif.Discovery;
