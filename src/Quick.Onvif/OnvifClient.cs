@@ -23,12 +23,13 @@ namespace Quick.Onvif
         {
             this.Options = options;
         }
-        public string CorrectUri(string addr)
+
+        public string CorrectUri(string addr, bool includePort = true)
         {
             var uriBuilder = new UriBuilder(addr);
             if (uriBuilder.Host != Options.Host)
                 uriBuilder.Host = Options.Host;
-            if (uriBuilder.Port != Options.Port)
+            if (includePort && uriBuilder.Port != Options.Port)
                 uriBuilder.Port = Options.Port;
             return uriBuilder.Uri.ToString();
         }
