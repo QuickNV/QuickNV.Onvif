@@ -73,6 +73,8 @@ namespace Quick.Onvif.Media
                 }
             }, profileToken);
             var streamUri = rep.Uri;
+            var rtspPort = new Uri(streamUri).Port;
+
             streamUri = client.CorrectUri(streamUri);
             var uriBuilder = new UriBuilder(streamUri);
             if (withCredential)
@@ -82,6 +84,8 @@ namespace Quick.Onvif.Media
             }
             if (client.Options.RtspPort > 0)
                 uriBuilder.Port = client.Options.RtspPort;
+            else
+                uriBuilder.Port = rtspPort;
             return uriBuilder.Uri.ToString();
         }
     }
