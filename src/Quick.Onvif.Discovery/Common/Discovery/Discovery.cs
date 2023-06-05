@@ -49,8 +49,7 @@ public class Discovery : IDisposable
 
 	private List<string> _listenMessages = new List<string>();
 
-	private AutoResetEvent _stopListenEvent = new AutoResetEvent(initialState: false);
-
+	private CancellationTokenSource cts;
 	private List<DiscoverySocketEventArgs> _packetsReceived = new List<DiscoverySocketEventArgs>();
 
 	private bool _parseLater;
@@ -224,30 +223,33 @@ public class Discovery : IDisposable
 		}
 		_packetsReceived.Clear();
 		_parseLater = parseLater;
-		_stopListenEvent.Reset();
+		cts?.Cancel();
+		cts = new CancellationTokenSource();
 		_socket.Listen();
 		_connectionThread = new Thread(CloseConnection);
 		Trace.WriteLine($"{DateTime.Now.ToLongTimeString()} StartListen, timeout={timeout}");
 		Trace.Flush();
-		_connectionThread.Start(new CloseConnectionState(timeout));
+		_connectionThread.Start(new CloseConnectionState(timeout, cts.Token));
 	}
 
 	protected void CloseConnection(object state)
 	{
-		int timeout = ((CloseConnectionState)state).Timeout;
+		var closeConnectionState = (CloseConnectionState)state;
+        int timeout = closeConnectionState.Timeout;
 		Trace.WriteLine($"{DateTime.Now.ToLongTimeString()} CloseConnection - started, timeout={timeout}");
 		Trace.Flush();
 		bool flag = false;
-		if (_listenAddress == null && _listenDevice == null)
-		{
-			Thread.Sleep(timeout);
-			flag = true;
-		}
-		else
-		{
-			flag = !_stopListenEvent.WaitOne(timeout);
-		}
-		Trace.WriteLine(string.Format("{0} CloseConnection - awaken {1}", DateTime.Now.ToLongTimeString(), flag ? "after timeout" : "by event"));
+        var task = Task.Delay(timeout, closeConnectionState.CancellationToken);
+        try
+        {
+            task.Wait();
+            flag = true;
+        }
+        catch
+        {
+            flag = false;
+        }
+        Trace.WriteLine(string.Format("{0} CloseConnection - awaken {1}", DateTime.Now.ToLongTimeString(), flag ? "after timeout" : "by event"));
 		Trace.Flush();
 		lock (_socketSync)
 		{
@@ -399,7 +401,7 @@ public class Discovery : IDisposable
 		{
 			ProcessIncomingPacket<T>(e, delegate
 			{
-				_stopListenEvent.Set();
+				cts?.Cancel();
 			});
 		}
 	}
@@ -489,11 +491,8 @@ public class Discovery : IDisposable
 
 	public void Close()
 	{
-		if (_connectionThread != null)
-		{
-			_connectionThread.Abort();
-			_connectionThread.Join();
-		}
+		cts?.Cancel();
+		cts = null;
 		lock (_socketSync)
 		{
 			if (_socket != null)
