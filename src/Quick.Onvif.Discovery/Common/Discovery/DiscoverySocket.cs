@@ -21,20 +21,13 @@ public class DiscoverySocket : IDisposable
 		_endpoint = new IPEndPoint(endpoint.Address, endpoint.Port);
 		Trace.WriteLine($"Socket {GetHashCode()} C-tor");
 		Trace.Flush();
-		if (OSInfo.MajorVersion == 5 && OSInfo.MinorVersion == 1)
-		{
-			Socket = new UdpClient(endpoint);
-		}
-		else
-		{
-			Socket = new UdpClient(endpoint.AddressFamily);
-		}
+		Socket = new UdpClient(endpoint.AddressFamily);
 		Socket.Client.ReceiveBufferSize = 4096;
 		Socket.Client.SendBufferSize = 4096;
 		Socket.Ttl = 10;
 		Socket.MulticastLoopback = false;
 		Socket.Client.ReceiveBufferSize = 50000;
-		if ((OSInfo.MajorVersion != 5 || OSInfo.MinorVersion != 1) && !object.Equals(endpoint.Address, IPAddress.Any) && !object.Equals(endpoint.Address, IPAddress.IPv6Any))
+		if (!object.Equals(endpoint.Address, IPAddress.Any) && !object.Equals(endpoint.Address, IPAddress.IPv6Any))
 		{
 			Socket.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, optionValue: true);
 			Socket.Client.Bind(endpoint);
