@@ -11,7 +11,7 @@
 		<RepositoryUrl>https://github.com/aaasoft/Quick.Onvif</RepositoryUrl>
 		<PackageTags>ONVIF;Onvif;Camera;</PackageTags>
 		<Description>Replay Control service for Quick.Onvif.</Description>
-		<Version>1.0.4</Version>
+		<Version>1.0.5</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
