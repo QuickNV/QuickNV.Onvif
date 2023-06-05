@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
 
-namespace TestTool.Proxies.WSDiscovery;
+namespace Quick.Onvif.Discovery.WSDiscovery;
 
 [Serializable]
 [GeneratedCode("xsd", "2.0.50727.3038")]

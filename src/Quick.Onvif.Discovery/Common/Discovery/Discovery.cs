@@ -13,7 +13,7 @@ using System.Threading;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using TestTool.Proxies.WSDiscovery;
+using Quick.Onvif.Discovery.WSDiscovery;
 using Quick.Onvif.Discovery.Common.Soap;
 using Quick.Onvif.Discovery.Common.TestEngine;
 

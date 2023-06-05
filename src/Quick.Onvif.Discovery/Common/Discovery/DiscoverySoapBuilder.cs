@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Xml.Schema;
-using TestTool.Proxies.WSDiscovery;
+using Quick.Onvif.Discovery.WSDiscovery;
 using Quick.Onvif.Discovery.Common.Soap;
 
 namespace Quick.Onvif.Discovery.Common.Discovery;

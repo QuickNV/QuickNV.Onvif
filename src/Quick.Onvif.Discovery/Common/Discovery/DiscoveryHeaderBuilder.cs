@@ -1,6 +1,6 @@
 using System;
 using System.Xml;
-using TestTool.Proxies.WSDiscovery;
+using Quick.Onvif.Discovery.WSDiscovery;
 using Quick.Onvif.Discovery.Common.Soap;
 
 namespace Quick.Onvif.Discovery.Common.Discovery;

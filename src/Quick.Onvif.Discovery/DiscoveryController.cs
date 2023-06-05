@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using TestTool.Proxies.WSDiscovery;
+using Quick.Onvif.Discovery.WSDiscovery;
 using Quick.Onvif.Discovery.Common.Discovery;
 
 namespace Quick.Onvif.Discovery

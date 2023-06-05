@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
 
-namespace TestTool.Proxies.Onvif;
+namespace Quick.Onvif.Discovery.Onvif;
 
 [Serializable]
 [GeneratedCode("svcutil", "4.0.30319.18020")]

@@ -8,8 +8,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
-using TestTool.Proxies.Onvif;
-using TestTool.Proxies.WSDiscovery;
+using Quick.Onvif.Discovery.Onvif;
+using Quick.Onvif.Discovery.WSDiscovery;
 using Quick.Onvif.Discovery.Common.Soap;
 
 namespace Quick.Onvif.Discovery.Common.Discovery;
