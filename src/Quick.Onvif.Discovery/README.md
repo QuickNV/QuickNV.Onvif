@@ -15,7 +15,7 @@ try
     Console.WriteLine("Start Discovery...");
     var devices = await controller.RunDiscovery();
     Console.WriteLine($"Find {devices.Length} devices.");
-    Console.WriteLine(JsonConvert.SerializeObject(devices));
+    Console.WriteLine(JsonConvert.SerializeObject(devices, Formatting.Indented));
 }
 catch (Exception ex)
 {
