@@ -1,28 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>logo.ico</ApplicationIcon>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationIcon>logo.ico</ApplicationIcon>
+		<Version>1.0.5</Version>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="logo.ico" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="logo.ico" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="LibVLCSharp.WinForms" Version="3.7.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.18" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="LibVLCSharp.WinForms" Version="3.7.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.18" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Quick.Onvif.Imaging\Quick.Onvif.Imaging.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Media\Quick.Onvif.Media.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.PTZ\Quick.Onvif.PTZ.csproj" />
-    <ProjectReference Include="..\Quick.Onvif\Quick.Onvif.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Quick.Onvif.Imaging\Quick.Onvif.Imaging.csproj" />
+		<ProjectReference Include="..\Quick.Onvif.Media\Quick.Onvif.Media.csproj" />
+		<ProjectReference Include="..\Quick.Onvif.PTZ\Quick.Onvif.PTZ.csproj" />
+		<ProjectReference Include="..\Quick.Onvif\Quick.Onvif.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -8,6 +8,7 @@ namespace Quick.Onvif.TestUI
         public LoginForm()
         {
             InitializeComponent();
+            Text = $"{Text} v{Application.ProductVersion}";
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
