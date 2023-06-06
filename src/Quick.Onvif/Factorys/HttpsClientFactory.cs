@@ -13,17 +13,15 @@ namespace Quick.Onvif.Factorys
 {
     public class HttpsClientFactory : ClientFactory
     {
-        private HttpClientCredentialType clientCredentialType;
-
-        public HttpsClientFactory(string userName, string password,HttpClientCredentialType clientCredentialType)
+        public HttpsClientFactory(string userName, string password, HttpClientCredentialType clientCredentialType)
         {
             var binding = new NetHttpBinding();
+            binding.UseDefaultWebProxy = false;
             binding.MessageEncoding = NetHttpMessageEncoding.Text;
             binding.Security.Mode = BasicHttpSecurityMode.Transport;
             binding.Security.Transport.ClientCredentialType = clientCredentialType;
 
-            InitConfig(binding, userName, password);
-            this.clientCredentialType = clientCredentialType;
+            InitConfig(binding, clientCredentialType, userName, password);
         }
 
         private class MyX509CertificateValidator : X509CertificateValidator
@@ -41,22 +39,7 @@ namespace Quick.Onvif.Factorys
                 CertificateValidationMode = X509CertificateValidationMode.Custom,
                 CustomCertificateValidator = MyX509CertificateValidator.Default
             };
-
-            switch (clientCredentialType)
-            {
-                case HttpClientCredentialType.None:
-                    break;
-                case HttpClientCredentialType.Digest:
-                    client.ClientCredentials.HttpDigest.ClientCredential.UserName = UserName;
-                    client.ClientCredentials.HttpDigest.ClientCredential.Password = Password;
-                    break;
-                case HttpClientCredentialType.Basic:
-                    client.ClientCredentials.UserName.UserName = UserName;
-                    client.ClientCredentials.UserName.Password = Password;
-                    break;
-                default:
-                    throw new NotSupportedException("Parameter 'clientCredentialType' only support None,Digest and Basic.");
-            }
+            base.InitClient(client);
         }
     }
 }
