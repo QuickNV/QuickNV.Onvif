@@ -18,6 +18,7 @@ namespace Quick.Onvif.Factorys
             var binding = new NetHttpBinding();
             binding.UseDefaultWebProxy = false;
             binding.MessageEncoding = NetHttpMessageEncoding.Text;
+            binding.MaxReceivedMessageSize = int.MaxValue;
             binding.Security.Mode = BasicHttpSecurityMode.Transport;
             binding.Security.Transport.ClientCredentialType = clientCredentialType;
 
