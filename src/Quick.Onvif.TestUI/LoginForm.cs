@@ -1,3 +1,4 @@
+using Quick.Onvif.TestUI.Utils;
 using System.ServiceModel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -50,7 +51,7 @@ namespace Quick.Onvif.TestUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ExceptionUtils.GetExceptionString(ex), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             finally
             {

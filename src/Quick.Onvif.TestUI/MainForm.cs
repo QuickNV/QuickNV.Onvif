@@ -1,17 +1,8 @@
-﻿using LibVLCSharp.Shared;
-using LibVLCSharp.WinForms;
+﻿using Microsoft.Win32;
 using Quick.Onvif.Imaging;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using Quick.Onvif.TestUI.Utils;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Quick.Onvif.TestUI
 {
@@ -21,7 +12,6 @@ namespace Quick.Onvif.TestUI
         private Media.MediaClient mediaClient;
         private PTZ.PTZClient ptzClient;
         private Imaging.ImagingPortClient imagingPortClient;
-        private LibVLC libVLC = new LibVLC();
 
         public MainForm(OnvifClient client)
         {
@@ -114,15 +104,61 @@ namespace Quick.Onvif.TestUI
                 scPreview.Enabled = false;
 
                 var streamUri = await mediaClient.QuickOnvif_GetStreamUriAsync(currentProfile.token, true);
-                var videoView = new VideoView()
+                var panel = new FlowLayoutPanel();
+                panel.Controls.Add(new Label()
                 {
-                    Dock = DockStyle.Fill,
-                    MediaPlayer = new MediaPlayer(libVLC)
+                    AutoSize = true,
+                    Text = "Live Url:"
+                });
+                var textBox = new TextBox()
+                {
+                    Text = streamUri,
+                    Multiline = true,
+                    ScrollBars = ScrollBars.Vertical,
+                    Height = 300,
+                    ReadOnly = true
                 };
-                videoView.MediaPlayer.Media = new LibVLCSharp.Shared.Media(libVLC, streamUri, FromType.FromLocation);
-                scPreview.Panel2.Controls.Add(videoView);
-                videoView.MediaPlayer.Play();
-                videoView.MediaPlayer.EncounteredError += MediaPlayer_EncounteredError;
+                panel.Controls.Add(textBox);
+                var button = new Button()
+                {
+                    AutoSize = true,
+                    Text = "Open in VLC media player"
+                };
+                button.Click += (sender, e) =>
+                {
+                    try
+                    {
+                        //计算机\HKEY_LOCAL_MACHINE\SOFTWARE\VideoLAN\VLC
+                        using (var softwareRK = Registry.LocalMachine.OpenSubKey("SOFTWARE"))
+                        using (var videoLANRK = softwareRK.OpenSubKey("VideoLAN"))
+                        {
+                            if (videoLANRK == null)
+                                throw new ArgumentNullException();
+                            using (var vlcRK = videoLANRK.OpenSubKey("VLC"))
+                            {
+                                if (vlcRK == null)
+                                    throw new ArgumentNullException();
+                                var appPath = vlcRK.GetValue(null).ToString();
+                                Process.Start(appPath, streamUri);
+                            }
+                        }
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        MessageBox.Show("Please install VLC media player first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ExceptionUtils.GetExceptionMessage(ex), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                };
+                panel.Controls.Add(button);
+                panel.Dock = DockStyle.Fill;
+                panel.SizeChanged += (sender, e) =>
+                {
+                    textBox.Width = panel.ClientSize.Width;
+                };
+                scPreview.Panel2.Controls.Add(panel);
             }
             catch (Exception ex)
             {
@@ -135,13 +171,6 @@ namespace Quick.Onvif.TestUI
             }
         }
 
-        private void MediaPlayer_EncounteredError(object sender, EventArgs e)
-        {
-            Invoke(() =>
-            {
-                MessageBox.Show("MediaPlayer_EncounteredError", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            });
-        }
         private const float PTZ_MOVE_SPEED = 0.2f;
         private async Task ptzContinuousMove(float xSpeed, float ySpeed, float zoomSpeed)
         {
