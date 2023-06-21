@@ -23,7 +23,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="System.ServiceModel.Http" Version="6.0.0" />
-		<PackageReference Include="System.ServiceModel.Security" Version="6.0.0" />
 	</ItemGroup>
 
 </Project>
