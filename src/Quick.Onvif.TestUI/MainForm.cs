@@ -17,8 +17,9 @@ namespace Quick.Onvif.TestUI
         {
             this.client = client;
             mediaClient = new Media.MediaClient(client);
-            ptzClient = new PTZ.PTZClient(client);
             imagingPortClient = new ImagingPortClient(client);
+            if (client.Capabilities.PTZ != null)
+                ptzClient = new PTZ.PTZClient(client);
 
             InitializeComponent();
             Text = $"{client.DeviceInformation.Manufacturer} - {client.DeviceInformation.Model} - {client.DeviceServiceAddressUri} v{Application.ProductVersion}";
@@ -176,6 +177,8 @@ namespace Quick.Onvif.TestUI
         {
             try
             {
+                if (ptzClient == null)
+                    throw new ApplicationException("Device not support PTZ");
                 await ptzClient.ContinuousMoveAsync(currentProfile.token, new PTZ.PTZSpeed()
                 {
                     PanTilt = new PTZ.Vector2D()
@@ -194,6 +197,7 @@ namespace Quick.Onvif.TestUI
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
         private async Task ptzFocusMove(float focusSpeed)
         {
             try
