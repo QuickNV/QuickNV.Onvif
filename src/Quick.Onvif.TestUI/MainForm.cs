@@ -140,7 +140,9 @@ namespace Quick.Onvif.TestUI
                                 if (vlcRK == null)
                                     throw new ArgumentNullException();
                                 var appPath = vlcRK.GetValue(null).ToString();
-                                Process.Start(appPath, streamUri);
+                                var psi = new ProcessStartInfo(appPath, streamUri);
+                                psi.WorkingDirectory = Path.GetDirectoryName(appPath);
+                                Process.Start(psi);
                             }
                         }
                     }
