@@ -10,8 +10,8 @@
 		<PackageIcon>logo.png</PackageIcon>
 		<RepositoryUrl>https://github.com/QuickNV/QuickNV.Onvif</RepositoryUrl>
 		<PackageTags>ONVIF;Onvif;Camera;</PackageTags>
-		<Description>Discovery service for QuickNV.Onvif.</Description>
-		<Version>1.0.0-preview1</Version>
+		<Description>Discovery Onvif devices.</Description>
+		<Version>1.0.0</Version>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
