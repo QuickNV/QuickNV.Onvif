@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>scbeta</Authors>
+		<Product>Quick.Onvif</Product>
+		<PackageProjectUrl>https://github.com/QuickNV/QuickNV.Onvif</PackageProjectUrl>
+		<PackageIcon>logo.png</PackageIcon>
+		<RepositoryUrl>https://github.com/QuickNV/QuickNV.Onvif</RepositoryUrl>
+		<PackageTags>ONVIF;Onvif;Camera;</PackageTags>
+		<Description>Discovery service for QuickNV.Onvif.</Description>
+		<Version>1.0.0-preview1</Version>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Common\Discovery\Schemas\addressing.xsd" />
+    <None Remove="Common\Discovery\Schemas\soap-envelope.xsd" />
+    <None Remove="Common\Discovery\Schemas\ws-discovery.xsd" />
+    <None Remove="Common\Discovery\Schemas\xml.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Common\Discovery\Schemas\addressing.xsd" />
+    <EmbeddedResource Include="Common\Discovery\Schemas\soap-envelope.xsd" />
+    <EmbeddedResource Include="Common\Discovery\Schemas\ws-discovery.xsd" />
+    <EmbeddedResource Include="Common\Discovery\Schemas\xml.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

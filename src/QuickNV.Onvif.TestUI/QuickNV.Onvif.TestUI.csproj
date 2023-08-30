@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<RollForward>Major</RollForward>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationIcon>logo.ico</ApplicationIcon>
+		<Version>1.0.0-preview1</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="logo.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\QuickNV.Onvif\QuickNV.Onvif.csproj" />
+	</ItemGroup>
+
+</Project>

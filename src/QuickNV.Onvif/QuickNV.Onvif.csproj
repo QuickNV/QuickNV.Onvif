@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>scbeta</Authors>
+		<Product>Quick.Onvif</Product>
+		<PackageProjectUrl>https://github.com/QuickNV/QuickNV.Onvif</PackageProjectUrl>
+		<PackageIcon>logo.png</PackageIcon>
+		<RepositoryUrl>https://github.com/QuickNV/QuickNV.Onvif</RepositoryUrl>
+		<PackageTags>ONVIF;Onvif;Camera;</PackageTags>
+		<Version>1.0.0-preview1</Version>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.ServiceModel.Http" Version="6.0.0" />
+	</ItemGroup>
+
+</Project>

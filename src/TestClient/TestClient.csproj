@@ -12,29 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Quick.Onvif.AccessControl\Quick.Onvif.AccessControl.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.ActionEngine\Quick.Onvif.ActionEngine.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Analytics\Quick.Onvif.Analytics.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.ApplicationManagement\Quick.Onvif.ApplicationManagement.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.AuthenticationBehavior\Quick.Onvif.AuthenticationBehavior.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Credential\Quick.Onvif.Credential.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.DeviceIO\Quick.Onvif.DeviceIO.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Display\Quick.Onvif.Display.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.DoorControl\Quick.Onvif.DoorControl.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Imaging\Quick.Onvif.Imaging.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Media2\Quick.Onvif.Media2.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Media\Quick.Onvif.Media.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Provisioning\Quick.Onvif.Provisioning.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.PTZ\Quick.Onvif.PTZ.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Receiver\Quick.Onvif.Receiver.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.RecordingControl\Quick.Onvif.RecordingControl.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.RecordingSearch\Quick.Onvif.RecordingSearch.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.ReplayControl\Quick.Onvif.ReplayControl.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Schedule\Quick.Onvif.Schedule.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Security\Quick.Onvif.Security.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Thermal\Quick.Onvif.Thermal.csproj" />
-    <ProjectReference Include="..\Quick.Onvif.Uplink\Quick.Onvif.Uplink.csproj" />
-    <ProjectReference Include="..\Quick.Onvif\Quick.Onvif.csproj" />
+    <ProjectReference Include="..\QuickNV.Onvif\QuickNV.Onvif.csproj" />
   </ItemGroup>
 
 </Project>
