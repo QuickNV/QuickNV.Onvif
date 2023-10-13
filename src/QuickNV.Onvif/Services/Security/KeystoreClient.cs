@@ -11,7 +11,7 @@ namespace QuickNV.Onvif.Security
     public partial class KeystoreClient
     {
         public KeystoreClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(Security)))
+            : this(client.ClientFactory, client.GetExtensionXAddr(nameof(Security)))
         {
         }
 

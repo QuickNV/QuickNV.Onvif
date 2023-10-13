@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.AuthenticationBehavior
     public partial class AuthenticationBehaviorPortClient
     {
         public AuthenticationBehaviorPortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(AuthenticationBehavior)))
+            : this(client.ClientFactory, client.GetExtensionXAddr(nameof(AuthenticationBehavior)))
         {
         }
 

@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.Thermal
     public partial class ThermalPortClient
     {
         public ThermalPortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(Thermal)))
+            : this(client.ClientFactory, client.GetExtensionXAddr(nameof(Thermal)))
         {
         }
 

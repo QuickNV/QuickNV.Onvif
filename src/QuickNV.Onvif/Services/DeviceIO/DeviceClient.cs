@@ -11,7 +11,7 @@ namespace QuickNV.Onvif.DeviceIO
     public partial class DeviceClient
     {
         public DeviceClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(DeviceIO)))
+            : this(client.ClientFactory, client.Capabilities.Extension.DeviceIO.XAddr)
         {
         }
 

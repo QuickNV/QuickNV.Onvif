@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.ApplicationManagement
     public partial class AppManagementClient
     {
         public AppManagementClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(ApplicationManagement)))
+            : this(client.ClientFactory, client.GetExtensionXAddr(nameof(ApplicationManagement)))
         {
         }
 

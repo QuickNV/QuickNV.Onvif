@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.DeviceIO
     public partial class DeviceIOPortClient
     {
         public DeviceIOPortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(DeviceIO)))
+            : this(client.ClientFactory, client.Capabilities.Extension.DeviceIO.XAddr)
         {
         }
 

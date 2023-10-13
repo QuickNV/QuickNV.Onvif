@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.Credential
     public partial class CredentialPortClient
     {
         public CredentialPortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(Credential)))
+            : this(client.ClientFactory, client.GetExtensionXAddr(nameof(Credential)))
         {
         }
 

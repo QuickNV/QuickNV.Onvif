@@ -7,6 +7,7 @@ using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace QuickNV.Onvif
 {
@@ -34,6 +35,30 @@ namespace QuickNV.Onvif
             return uriBuilder.Uri.ToString();
         }
 
+        private void handleCapabilitiesItem<T>(T t, Func<T, string> getter, Action<T, string> setter)
+            where T : class, new()
+        {
+            if (t == null)
+                return;
+            var v = getter(t);
+            if (!string.IsNullOrEmpty(v))
+                setter(t, CorrectUri(v));
+        }
+
+        private T handleCapabilitiesExtensionItem<T>(T t, string propertyName, Action<T, string> setter)
+            where T : class, new()
+        {
+            if (t == null)
+            {
+                var tmp = GetExtensionXAddr(propertyName);
+                if (string.IsNullOrEmpty(tmp))
+                    return null;
+                t = new T();
+                setter(t, tmp);
+            }
+            return t;
+        }
+
         public async Task ConnectAsync()
         {
             ClientFactory = ClientFactory.GetClientFactory(
@@ -57,21 +82,14 @@ namespace QuickNV.Onvif
                   Device.CapabilityCategory.All
                 });
                 Capabilities = rep.Capabilities;
-                if (!string.IsNullOrEmpty(Capabilities.Analytics?.XAddr))
-                    Capabilities.Analytics.XAddr = CorrectUri(Capabilities.Analytics.XAddr);
-                if (!string.IsNullOrEmpty(Capabilities.Device?.XAddr))
-                    Capabilities.Device.XAddr = CorrectUri(Capabilities.Device.XAddr);
-                if (!string.IsNullOrEmpty(Capabilities.Events?.XAddr))
-                    Capabilities.Events.XAddr = CorrectUri(Capabilities.Events.XAddr);
-                if (!string.IsNullOrEmpty(Capabilities.Imaging?.XAddr))
-                    Capabilities.Imaging.XAddr = CorrectUri(Capabilities.Imaging.XAddr);
-                if (!string.IsNullOrEmpty(Capabilities.Media?.XAddr))
-                    Capabilities.Media.XAddr = CorrectUri(Capabilities.Media.XAddr);
-                if (!string.IsNullOrEmpty(Capabilities.PTZ?.XAddr))
-                    Capabilities.PTZ.XAddr = CorrectUri(Capabilities.PTZ.XAddr);
+                handleCapabilitiesItem(Capabilities.Analytics, t => t.XAddr, (t, v) => t.XAddr = v);
+                handleCapabilitiesItem(Capabilities.Device, t => t.XAddr, (t, v) => t.XAddr = v);
+                handleCapabilitiesItem(Capabilities.Events, t => t.XAddr, (t, v) => t.XAddr = v);
+                handleCapabilitiesItem(Capabilities.Imaging, t => t.XAddr, (t, v) => t.XAddr = v);
+                handleCapabilitiesItem(Capabilities.Media, t => t.XAddr, (t, v) => t.XAddr = v);
+                handleCapabilitiesItem(Capabilities.PTZ, t => t.XAddr, (t, v) => t.XAddr = v);
 
-                if (!string.IsNullOrEmpty(Capabilities.Extension?.AnalyticsDevice?.XAddr))
-                    Capabilities.Extension.AnalyticsDevice.XAddr = CorrectUri(Capabilities.Extension.AnalyticsDevice.XAddr);
+
                 foreach (var element in Capabilities.Extension.Any)
                 {
                     foreach (var child in element.ChildNodes)
@@ -85,14 +103,49 @@ namespace QuickNV.Onvif
                             elXAddr.InnerText = CorrectUri(elXAddr.InnerText);
                     }
                 }
+
+                Capabilities.Extension.AnalyticsDevice =
+                    handleCapabilitiesExtensionItem(Capabilities.Extension.AnalyticsDevice,
+                    nameof(Capabilities.Extension.AnalyticsDevice), (t, v) => t.XAddr = v);
+                Capabilities.Extension.DeviceIO =
+                    handleCapabilitiesExtensionItem(Capabilities.Extension.DeviceIO,
+                    nameof(Capabilities.Extension.DeviceIO), (t, v) => t.XAddr = v);
+                Capabilities.Extension.DeviceIO =
+                    handleCapabilitiesExtensionItem(Capabilities.Extension.DeviceIO,
+                    nameof(Capabilities.Extension.DeviceIO), (t, v) => t.XAddr = v);
+                Capabilities.Extension.Display =
+                    handleCapabilitiesExtensionItem(Capabilities.Extension.Display,
+                    nameof(Capabilities.Extension.Display), (t, v) => t.XAddr = v);
+                Capabilities.Extension.Receiver =
+                    handleCapabilitiesExtensionItem(Capabilities.Extension.Receiver,
+                    nameof(Capabilities.Extension.Receiver), (t, v) => t.XAddr = v);
+                Capabilities.Extension.Recording =
+                    handleCapabilitiesExtensionItem(Capabilities.Extension.Recording,
+                    nameof(Capabilities.Extension.Recording), (t, v) => t.XAddr = v);
+                Capabilities.Extension.Replay =
+                    handleCapabilitiesExtensionItem(Capabilities.Extension.Replay,
+                    nameof(Capabilities.Extension.Replay), (t, v) => t.XAddr = v);
+                Capabilities.Extension.Search =
+                    handleCapabilitiesExtensionItem(Capabilities.Extension.Search,
+                    nameof(Capabilities.Extension.Search), (t, v) => t.XAddr = v);
             }
         }
 
-        public string GetXAddr(string name)
+        public string GetExtensionXAddr(string name)
         {
-            if (Options == null)
-                throw new ArgumentNullException(nameof(Options.GetXAddrFunc));
-            return Options.GetXAddrFunc(Options, name);
+            var xmlElement = Capabilities.Extension.Any.FirstOrDefault(t => t.LocalName == name);
+            if (xmlElement == null)
+                return null;
+            foreach (var child in xmlElement.ChildNodes)
+            {
+                XmlElement elXAddr = child as XmlElement;
+                if (elXAddr == null)
+                    continue;
+                if (elXAddr.LocalName != "XAddr")
+                    continue;
+                return elXAddr.InnerText;
+            }
+            return null;
         }
     }
 }

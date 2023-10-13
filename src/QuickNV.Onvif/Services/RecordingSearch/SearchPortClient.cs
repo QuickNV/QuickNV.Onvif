@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.RecordingSearch
     public partial class SearchPortClient
     {
         public SearchPortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(RecordingSearch)))
+            : this(client.ClientFactory, client.Capabilities.Extension.Search.XAddr)
         {
         }
 

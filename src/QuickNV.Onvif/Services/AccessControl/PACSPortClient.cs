@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.AccessControl
     public partial class PACSPortClient
     {
         public PACSPortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(AccessControl)))
+            : this(client.ClientFactory, client.GetExtensionXAddr(nameof(AccessControl)))
         {
         }
 

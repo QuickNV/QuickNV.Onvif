@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.Provisioning
     public partial class ProvisioningServiceClient
     {
         public ProvisioningServiceClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(Provisioning)))
+            : this(client.ClientFactory, client.GetExtensionXAddr(nameof(Provisioning)))
         {
         }
 

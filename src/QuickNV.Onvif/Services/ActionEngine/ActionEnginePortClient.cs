@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.ActionEngine
     public partial class ActionEnginePortClient
     {
         public ActionEnginePortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(ActionEngine)))
+            : this(client.ClientFactory, client.GetExtensionXAddr(nameof(ActionEngine)))
         {
         }
 

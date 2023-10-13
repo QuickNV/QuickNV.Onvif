@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.Schedule
     public partial class SchedulePortClient
     {
         public SchedulePortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(Schedule)))
+            : this(client.ClientFactory, client.GetExtensionXAddr(nameof(Schedule)))
         {
         }
 

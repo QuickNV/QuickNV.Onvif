@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.RecordingControl
     public partial class RecordingPortClient
     {
         public RecordingPortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(RecordingControl)))
+            : this(client.ClientFactory, client.Capabilities.Extension.Recording.XAddr)
         {
         }
 

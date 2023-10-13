@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.DoorControl
     public partial class DoorControlPortClient
     {
         public DoorControlPortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(DoorControl)))
+            : this(client.ClientFactory, client.GetExtensionXAddr(nameof(DoorControl)))
         {
         }
 

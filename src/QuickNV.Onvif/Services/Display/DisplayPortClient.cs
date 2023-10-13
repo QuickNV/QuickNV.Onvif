@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.Display
     public partial class DisplayPortClient
     {
         public DisplayPortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(Display)))
+            : this(client.ClientFactory, client.Capabilities.Extension.Display.XAddr)
         {
         }
 

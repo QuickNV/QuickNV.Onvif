@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.Receiver
     public partial class ReceiverPortClient
     {
         public ReceiverPortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(Receiver)))
+            : this(client.ClientFactory, client.Capabilities.Extension.Receiver.XAddr)
         {
         }
 

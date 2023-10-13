@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.ReplayControl
     public partial class ReplayPortClient
     {
         public ReplayPortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(ReplayControl)))
+            : this(client.ClientFactory, client.Capabilities.Extension.Replay.XAddr)
         {
         }
 

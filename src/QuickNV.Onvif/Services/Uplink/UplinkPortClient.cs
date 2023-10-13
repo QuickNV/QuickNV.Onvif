@@ -6,7 +6,7 @@ namespace QuickNV.Onvif.Uplink
     public partial class UplinkPortClient
     {
         public UplinkPortClient(OnvifClient client)
-            : this(client.ClientFactory, client.GetXAddr(nameof(Uplink)))
+            : this(client.ClientFactory, client.GetExtensionXAddr(nameof(Uplink)))
         {
         }
 
