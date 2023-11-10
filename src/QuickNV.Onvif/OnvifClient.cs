@@ -89,18 +89,25 @@ namespace QuickNV.Onvif
                 handleCapabilitiesItem(Capabilities.Media, t => t.XAddr, (t, v) => t.XAddr = v);
                 handleCapabilitiesItem(Capabilities.PTZ, t => t.XAddr, (t, v) => t.XAddr = v);
 
-
-                foreach (var element in Capabilities.Extension.Any)
+                if (Capabilities.Extension.Any != null)
                 {
-                    foreach (var child in element.ChildNodes)
+                    for (int i = 0; i < Capabilities.Extension.Any.Length; i++)
                     {
-                        XmlElement elXAddr = child as XmlElement;
-                        if (elXAddr == null)
+                        var element = Capabilities.Extension.Any[i];
+                        if (element == null)
+                        {
                             continue;
-                        if (elXAddr.LocalName != "XAddr")
-                            continue;
-                        if (!string.IsNullOrEmpty(elXAddr.InnerText))
-                            elXAddr.InnerText = CorrectUri(elXAddr.InnerText);
+                        }
+                        foreach (var child in element.ChildNodes)
+                        {
+                            XmlElement elXAddr = child as XmlElement;
+                            if (elXAddr == null)
+                                continue;
+                            if (elXAddr.LocalName != "XAddr")
+                                continue;
+                            if (!string.IsNullOrEmpty(elXAddr.InnerText))
+                                elXAddr.InnerText = CorrectUri(elXAddr.InnerText);
+                        }
                     }
                 }
 
@@ -133,6 +140,10 @@ namespace QuickNV.Onvif
 
         public string GetExtensionXAddr(string name)
         {
+            if(Capabilities.Extension.Any == null)
+            {
+                return null;
+            }
             var xmlElement = Capabilities.Extension.Any.FirstOrDefault(t => t.LocalName == name);
             if (xmlElement == null)
                 return null;

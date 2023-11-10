@@ -1,32 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Net;
+using System.Net.NetworkInformation;
 
 namespace QuickNV.Onvif.Discovery
 {
     public class DiscoveryController2
     {
-        private IPAddress networkInterface;
         private DiscoveryController controller;
         private List<DeviceDiscoveryData> list;
         private Exception lastException;
         private Task<DeviceDiscoveryData[]> discoveryTask;
 
-        public DiscoveryController2(IPAddress networkInterface)
+        public DiscoveryController2(TimeSpan timeout)
         {
-            this.networkInterface = networkInterface;
-            controller = new DiscoveryController();
+            controller = new DiscoveryController(string.Empty, timeout);
             controller.DiscoveryCompleted += Controller_DiscoveryCompleted;
             controller.DiscoveryError += Controller_DiscoveryError;
             controller.DeviceDiscovered += Controller_DeviceDiscovered;
 
         }
-
         public async Task<DeviceDiscoveryData[]> RunDiscovery()
+        {
+            var upInterfaces = NetworkInterface.GetAllNetworkInterfaces().Where(i =>
+                 i.OperationalStatus == OperationalStatus.Up && i.NetworkInterfaceType != NetworkInterfaceType.Loopback);
+
+            var ipAddresses = new List<IPAddress>();
+            foreach (var iface in upInterfaces)
+            {
+                foreach (var ip in iface.GetIPProperties().UnicastAddresses)
+                {
+                    if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    {
+                        ipAddresses.Add(ip.Address);
+                    }
+                }
+            }
+            var devices = new List<DeviceDiscoveryData>();
+
+            foreach (var ip in ipAddresses)
+            {
+                var result = await RunDiscovery(ip);
+                devices.AddRange(result.DistinctBy(r => r.UUID));
+            }
+            return devices.ToArray();
+        }
+        public async Task<DeviceDiscoveryData[]> RunDiscovery(IPAddress ipAddress)
         {
             list = new List<DeviceDiscoveryData>();
             lastException = null;
@@ -36,7 +53,7 @@ namespace QuickNV.Onvif.Discovery
                     throw lastException;
                 return list.ToArray();
             });
-            controller.RunDiscovery(networkInterface);
+            controller.RunDiscovery(ipAddress);
             return await discoveryTask;
         }
 
