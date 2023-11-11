@@ -10,6 +10,11 @@ namespace QuickNV.Onvif.Discovery
         private Exception lastException;
         private Task<DeviceDiscoveryData[]> discoveryTask;
 
+        public DiscoveryController2()
+            : this(TimeSpan.FromSeconds(5))
+        {
+        }
+
         public DiscoveryController2(TimeSpan timeout)
         {
             controller = new DiscoveryController(string.Empty, timeout);
@@ -43,6 +48,7 @@ namespace QuickNV.Onvif.Discovery
             }
             return devices.ToArray();
         }
+
         public async Task<DeviceDiscoveryData[]> RunDiscovery(IPAddress ipAddress)
         {
             list = new List<DeviceDiscoveryData>();
