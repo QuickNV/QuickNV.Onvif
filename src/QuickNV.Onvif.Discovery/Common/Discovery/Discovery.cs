@@ -33,13 +33,13 @@ public class Discovery : IDisposable
 
     public const int WS_DISCOVER_PORT = 3702;
 
-    public const int WS_DISCOVER_TIMEOUT = 5000;
-
     public MessageFilterFunction MessageFilter;
 
     private DiscoverySocket _socket;
 
     private readonly object _socketSync = new object();
+
+    private readonly TimeSpan _timeout;
 
     private Thread _connectionThread;
 
@@ -74,20 +74,24 @@ public class Discovery : IDisposable
 
     public event EventHandler<MessageEventArgs> MessageSent;
 
-    public Discovery(IPAddress local)
+    public Discovery(IPAddress local, TimeSpan timeout)
     {
         _endPointLocal = new IPEndPoint(local, WS_DISCOVER_PORT);
-        Stream manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Quick.Onvif.Discovery.Common.Discovery.Schemas.ws-discovery.xsd");
+        _timeout = timeout;
+
+        var executingAssembly = Assembly.GetExecutingAssembly();
+        var resourceNames =  executingAssembly.GetManifestResourceNames();
+        Stream manifestResourceStream = executingAssembly.GetManifestResourceStream("QuickNV.Onvif.Discovery.Common.Discovery.Schemas.ws-discovery.xsd");
         XmlSchema item = XmlSchema.Read(manifestResourceStream, null);
         manifestResourceStream.Close();
-        Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("Quick.Onvif.Discovery.Common.Discovery.Schemas.addressing.xsd");
+        Stream manifestResourceStream2 = executingAssembly.GetManifestResourceStream("QuickNV.Onvif.Discovery.Common.Discovery.Schemas.addressing.xsd");
         XmlSchema item2 = XmlSchema.Read(manifestResourceStream2, null);
         manifestResourceStream2.Close();
         _discoverySchemas = new List<XmlSchema> { item, item2 };
     }
 
-    public Discovery(IPAddress local, ProcessMessage processMessageMethod)
-        : this(local)
+    public Discovery(IPAddress local, TimeSpan timeout, ProcessMessage processMessageMethod)
+        : this(local, timeout)
     {
         _processMessageMethod = processMessageMethod;
     }
@@ -109,22 +113,22 @@ public class Discovery : IDisposable
 
     public void Probe(DiscoveryUtils.DiscoveryType[][] types, string[] scopes)
     {
-        Probe(multicast: true, null, null, WS_DISCOVER_TIMEOUT, types, scopes);
+        Probe(multicast: true, null, null, types, scopes);
     }
 
     public void Probe(IPAddress address, DiscoveryUtils.DiscoveryType[][] types, string[] scopes)
     {
-        Probe(multicast: false, address, null, WS_DISCOVER_TIMEOUT, types, scopes);
+        Probe(multicast: false, address, null, types, scopes);
     }
 
     public void Probe(bool multicast, IPAddress address, string deviceId, DiscoveryUtils.DiscoveryType[][] types)
     {
-        Probe(multicast, address, deviceId, WS_DISCOVER_TIMEOUT, types, null);
+        Probe(multicast, address, deviceId, types, null);
     }
 
-    public void Probe(bool multicast, IPAddress address, string deviceId, int timeout, DiscoveryUtils.DiscoveryType[][] types, string[] scopes)
+    public void Probe(bool multicast, IPAddress address, string deviceId, DiscoveryUtils.DiscoveryType[][] types, string[] scopes)
     {
-        Probe(multicast, address, deviceId, timeout, types, scopes, null);
+        Probe(multicast, address, deviceId, types, scopes, null);
     }
 
     private void SendToLocal3702(byte[] msg)
@@ -147,7 +151,7 @@ public class Discovery : IDisposable
         }
     }
 
-    public void Probe(bool multicast, IPAddress address, string deviceId, int timeout, DiscoveryUtils.DiscoveryType[][] types, string[] scopes, string matchRule)
+    public void Probe(bool multicast, IPAddress address, string deviceId, DiscoveryUtils.DiscoveryType[][] types, string[] scopes, string matchRule)
     {
         PortHolder portHolder = new PortHolder(PortProtocolType.Udp, ProtocolVersion.IPv4);
         portHolder.OccupyFreePort(1000);
@@ -179,7 +183,7 @@ public class Discovery : IDisposable
                 list.Add((_processMessageMethod != null) ? _processMessageMethod(array2) : array2);
             }
             list.Reverse();
-            StartListen(timeout, address, deviceId, list2.ToArray(), parseLater: true);
+            StartListen(address, deviceId, list2.ToArray(), parseLater: true);
             _socket.Send(destination, list);
             foreach (byte[] item in list)
             {
@@ -204,7 +208,7 @@ public class Discovery : IDisposable
         }
     }
 
-    protected void StartListen(int timeout, IPAddress address, string device, string[] messageIds, bool parseLater)
+    protected void StartListen(IPAddress address, string device, string[] messageIds, bool parseLater)
     {
         Trace.WriteLine($"{DateTime.Now} Discovery StartListen");
         Trace.Flush();
@@ -227,16 +231,16 @@ public class Discovery : IDisposable
         cts = new CancellationTokenSource();
         _socket.Listen();
         _connectionThread = new Thread(CloseConnection);
-        Trace.WriteLine($"{DateTime.Now.ToLongTimeString()} StartListen, timeout={timeout}");
+        Trace.WriteLine($"{DateTime.Now.ToLongTimeString()} StartListen, timeout={_timeout.TotalMilliseconds} ms");
         Trace.Flush();
-        _connectionThread.Start(new CloseConnectionState(timeout, cts.Token));
+        _connectionThread.Start(new CloseConnectionState(_timeout, cts.Token));
     }
 
     protected void CloseConnection(object state)
     {
         var closeConnectionState = (CloseConnectionState)state;
-        int timeout = closeConnectionState.Timeout;
-        Trace.WriteLine($"{DateTime.Now.ToLongTimeString()} CloseConnection - started, timeout={timeout}");
+        var timeout = closeConnectionState.Timeout;
+        Trace.WriteLine($"{DateTime.Now.ToLongTimeString()} CloseConnection - started, timeout={timeout.TotalMilliseconds} ms");
         Trace.Flush();
         bool flag = false;
         var task = Task.Delay(timeout, closeConnectionState.CancellationToken);
@@ -486,7 +490,7 @@ public class Discovery : IDisposable
         {
             _socket.MessageReceived += value;
         }
-        StartListen(timeout, from, deviceId, null, parseLater: false);
+        StartListen(from, deviceId, null, parseLater: false);
     }
 
     public void Close()

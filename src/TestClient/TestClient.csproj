@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\QuickNV.Onvif.Discovery\QuickNV.Onvif.Discovery.csproj" />
     <ProjectReference Include="..\QuickNV.Onvif\QuickNV.Onvif.csproj" />
   </ItemGroup>
 

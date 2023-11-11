@@ -8,16 +8,23 @@ namespace QuickNV.Onvif.Discovery
     {
         private int _queriesRunning;
         private string searchScopes;
+        private readonly TimeSpan timeout;
+
         public event Action<DeviceDiscoveryData> DeviceDiscovered;
         public event Action DiscoveryStarted;
         public event Action<Exception> DiscoveryError;
         public event Action DiscoveryCompleted;
 
-        public DiscoveryController() { }
+        public DiscoveryController() 
+        {
+            this.searchScopes = string.Empty;
+            this.timeout = TimeSpan.FromSeconds(5);
+        }
 
-        public DiscoveryController(string searchScopes)
+        public DiscoveryController(string searchScopes, TimeSpan timeout)
         {
             this.searchScopes = searchScopes;
+            this.timeout = timeout;
         }
 
         protected void OnDeviceDiscovered(object sender, DiscoveryMessageEventArgs e, List<DeviceDiscoveryData> allDevices, List<DiscoveryErrorEventArgs> errors, DiscoveryUtils.DiscoveryType[][] types)
@@ -61,11 +68,6 @@ namespace QuickNV.Onvif.Discovery
                     this.DiscoveryError(errors[0].Exception);
                 }
             }
-            else if (allDevices.Count == 0 && this.DiscoveryError != null)
-            {
-                Exception obj = new Exception(string.Format("Device did not respond or device type is not {0} ", "NetworkVideoTransmitter"));
-                this.DiscoveryError(obj);
-            }
             if (this.DiscoveryCompleted != null)
             {
                 this.DiscoveryCompleted();
@@ -82,7 +84,7 @@ namespace QuickNV.Onvif.Discovery
         DiscoveryUtils.GetOnvif10Type(),
         DiscoveryUtils.GetOnvif20Type()
             };
-            Common.Discovery.Discovery discovery = new Common.Discovery.Discovery(local);
+            Common.Discovery.Discovery discovery = new Common.Discovery.Discovery(local, timeout);
             discovery.Discovered += delegate (object s, DiscoveryMessageEventArgs e)
             {
                 OnDeviceDiscovered(s, e, devices, errors, types);

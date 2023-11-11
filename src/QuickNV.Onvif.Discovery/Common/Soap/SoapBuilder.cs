@@ -23,10 +23,10 @@ public class SoapBuilder
 	{
 		_soapEnvelopeNS = new Uri("http://www.w3.org/2003/05/soap-envelope");
 		_serializersCache = new Dictionary<Guid, XmlSerializer>();
-		Stream manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Quick.Onvif.Discovery.Common.Discovery.Schemas.xml.xsd");
+		Stream manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("QuickNV.Onvif.Discovery.Common.Discovery.Schemas.xml.xsd");
 		XmlSchema item = XmlSchema.Read(manifestResourceStream, null);
 		manifestResourceStream.Close();
-		Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("Quick.Onvif.Discovery.Common.Discovery.Schemas.soap-envelope.xsd");
+		Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("QuickNV.Onvif.Discovery.Common.Discovery.Schemas.soap-envelope.xsd");
 		XmlSchema item2 = XmlSchema.Read(manifestResourceStream2, null);
 		manifestResourceStream2.Close();
 		_soapSchemas = new List<XmlSchema> { item, item2 };
