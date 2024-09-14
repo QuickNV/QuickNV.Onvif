@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace QuickNV.Onvif
 {
-    public class OnvifClient
+    public class OnvifClient : IDisposable
     {
         public OnvifClientOptions Options { get; private set; }
         public Uri DeviceServiceAddressUri { get; private set; }
@@ -140,7 +140,7 @@ namespace QuickNV.Onvif
 
         public string GetExtensionXAddr(string name)
         {
-            if(Capabilities.Extension.Any == null)
+            if (Capabilities.Extension.Any == null)
             {
                 return null;
             }
@@ -157,6 +157,19 @@ namespace QuickNV.Onvif
                 return elXAddr.InnerText;
             }
             return null;
+        }
+
+        public void Dispose()
+        {
+            DeviceInformation = null;
+            Capabilities = null;
+            if (DeviceClient != null)
+            {
+                using (DeviceClient)
+                    DeviceClient.Close();
+                DeviceClient = null;
+            }
+            ClientFactory = null;
         }
     }
 }

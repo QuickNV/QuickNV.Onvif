@@ -16,19 +16,22 @@ var client = new QuickNV.Onvif.OnvifClient(new QuickNV.Onvif.OnvifClientOptions(
     UserName = "admin",
     Password = "Bs123456"
 });
-Console.WriteLine("Connecting...");
-await client.ConnectAsync();
-Console.WriteLine("DeviceInformation: " + JsonConvert.SerializeObject(client.DeviceInformation, Formatting.Indented));
-
+using (client)
 {
-    var mediaClient = new QuickNV.Onvif.Media.MediaClient(client);
-    var ret = await mediaClient.GetProfilesAsync();
-    Console.WriteLine("Media Profiles: " + JsonConvert.SerializeObject(ret, Formatting.Indented));
-}
+    Console.WriteLine("Connecting...");
+    await client.ConnectAsync();
+    Console.WriteLine("DeviceInformation: " + JsonConvert.SerializeObject(client.DeviceInformation, Formatting.Indented));
 
-{
-    var mediaClient2 = new QuickNV.Onvif.Media2.Media2Client(client);
-    var ret = mediaClient2.GetServiceCapabilitiesAsync();
-    Console.WriteLine("Media2 ServiceCapabilities: " + JsonConvert.SerializeObject(ret, Formatting.Indented));
+    using (var mediaClient = new QuickNV.Onvif.Media.MediaClient(client))
+    {
+        var ret = await mediaClient.GetProfilesAsync();
+        Console.WriteLine("Media Profiles: " + JsonConvert.SerializeObject(ret, Formatting.Indented));
+    }
+
+    using (var mediaClient2 = new QuickNV.Onvif.Media2.Media2Client(client))
+    {
+        var ret = mediaClient2.GetServiceCapabilitiesAsync();
+        Console.WriteLine("Media2 ServiceCapabilities: " + JsonConvert.SerializeObject(ret, Formatting.Indented));
+    }
 }
 ```

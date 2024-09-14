@@ -6,7 +6,7 @@ using QuickNV.Onvif.Media;
 var discovery = new DiscoveryController2(TimeSpan.FromSeconds(1));
 var devices = await discovery.RunDiscovery();
 
-if(!devices.Any())
+if (!devices.Any())
 {
     Console.WriteLine("No cameras found");
     return;
@@ -23,27 +23,29 @@ var client = new OnvifClient(new OnvifClientOptions
     Port = uri.Port
 });
 
-
-Console.WriteLine("Connecting...");
-await client.ConnectAsync();
-Console.WriteLine("DeviceInformation: " + JsonConvert.SerializeObject(client.DeviceInformation, Formatting.Indented));
-
-var mediaClient = new MediaClient(client);
-var profilesResponse = await mediaClient.GetProfilesAsync();
-
-foreach (var profile in profilesResponse.Profiles)
+using (client)
 {
-    var stream = await mediaClient.QuickOnvif_GetStreamUriAsync(profile.token, true);
-    var resolution = $"{profile.VideoEncoderConfiguration.Resolution.Width}x{profile.VideoEncoderConfiguration.Resolution.Height}";
-    
-    Console.WriteLine("Stream: {0}", new
-    { 
-        profile.Name, 
-        StreamUrl = stream, 
-        profile.VideoEncoderConfiguration.Encoding,
-        resolution
-    });
+    Console.WriteLine("Connecting...");
+    await client.ConnectAsync();
+    Console.WriteLine("DeviceInformation: " + JsonConvert.SerializeObject(client.DeviceInformation, Formatting.Indented));
+
+    using (var mediaClient = new MediaClient(client))
+    {
+        var profilesResponse = await mediaClient.GetProfilesAsync();
+
+        foreach (var profile in profilesResponse.Profiles)
+        {
+            var stream = await mediaClient.QuickOnvif_GetStreamUriAsync(profile.token, true);
+            var resolution = $"{profile.VideoEncoderConfiguration.Resolution.Width}x{profile.VideoEncoderConfiguration.Resolution.Height}";
+
+            Console.WriteLine("Stream: {0}", new
+            {
+                profile.Name,
+                StreamUrl = stream,
+                profile.VideoEncoderConfiguration.Encoding,
+                resolution
+            });
+        }
+    }
 }
-
-
 Console.ReadKey();
